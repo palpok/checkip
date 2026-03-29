@@ -326,6 +326,17 @@ async function sheetsAppend(range, values) {
 }
 
 // ── JWT / Access Token ────────────────────────────────────────────────────────
+// Dùng TextEncoder để encode đúng UTF-8, tránh lỗi btoa với Unicode
+function b64url(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+    .replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+}
+function b64urlBytes(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+}
+
 async function getAccessToken() {
   const cached = sessionStorage.getItem('_token');
   const exp    = parseInt(sessionStorage.getItem('_token_exp')||'0');
@@ -333,26 +344,50 @@ async function getAccessToken() {
 
   const sa  = JSON.parse(cfg.apiKey);
   const now = Math.floor(Date.now()/1000);
-  const b64 = o => btoa(JSON.stringify(o)).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
-  const hdr = {alg:'RS256',typ:'JWT'};
-  const pay = {iss:sa.client_email,scope:'https://www.googleapis.com/auth/spreadsheets',
-               aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3600};
-  const si  = `${b64(hdr)}.${b64(pay)}`;
 
-  const pemBody = sa.private_key.replace(/-----[^-]+-----/g,'').replace(/\s/g,'');
-  const keyDer  = Uint8Array.from(atob(pemBody),c=>c.charCodeAt(0));
-  const key     = await crypto.subtle.importKey('pkcs8',keyDer,
-    {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
-  const sigBuf  = await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(si));
-  const sig     = btoa(String.fromCharCode(...new Uint8Array(sigBuf)))
-    .replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  const header  = {alg:'RS256',typ:'JWT'};
+  const payload = {
+    iss:   sa.client_email,
+    scope: 'https://www.googleapis.com/auth/spreadsheets',
+    aud:   'https://oauth2.googleapis.com/token',
+    iat:   now,
+    exp:   now + 3600,
+  };
 
-  const resp = await fetch('https://oauth2.googleapis.com/token',{
-    method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${si}.${sig}`,
+  const headerB64  = b64url(JSON.stringify(header));
+  const payloadB64 = b64url(JSON.stringify(payload));
+  const sigInput   = `${headerB64}.${payloadB64}`;
+
+  // Import RSA private key
+  const pem     = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|
+|
+/g,'');
+  const derBin  = atob(pem);
+  const derArr  = new Uint8Array(derBin.length);
+  for (let i=0;i<derBin.length;i++) derArr[i]=derBin.charCodeAt(i);
+
+  const cryptoKey = await crypto.subtle.importKey(
+    'pkcs8', derArr.buffer,
+    {name:'RSASSA-PKCS1-v1_5', hash:{name:'SHA-256'}},
+    false, ['sign']
+  );
+
+  const sigBuf = await crypto.subtle.sign(
+    {name:'RSASSA-PKCS1-v1_5'},
+    cryptoKey,
+    new TextEncoder().encode(sigInput)
+  );
+  const sigB64 = b64urlBytes(new Uint8Array(sigBuf));
+  const jwt    = `${sigInput}.${sigB64}`;
+
+  const resp = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
   });
   const data = await resp.json();
   if (!data.access_token) throw new Error('Token error: '+JSON.stringify(data));
+
   sessionStorage.setItem('_token', data.access_token);
   sessionStorage.setItem('_token_exp', String((now+3500)*1000));
   return data.access_token;
@@ -370,34 +405,36 @@ async function getMyIp() {
 }
 
 async function loadIpHistory() {
-  const rows = await sheetsGet('IP_History!A:C');
-  ipHistory  = {};
+  const rows = await sheetsGet('IP_History!A:B');
+  ipHistory  = [];   // [{ip, time}]
   for (const r of rows.slice(1)) {
-    if (r[0]&&r[1]) ipHistory[r[0]]=r[1];
+    if (r[0]) ipHistory.push({ip: r[0], time: r[1]||''});
   }
   localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
 }
 
-function findDups(ip) {
-  return Object.entries(ipHistory).filter(([,v])=>v===ip).map(([k])=>k);
+// Kiểm tra ip có trong 24h gần đây không (giống logic PC)
+function isDup(ip) {
+  const now = Date.now();
+  const h24 = 24 * 60 * 60 * 1000;
+  return ipHistory.some(r => {
+    if (r.ip !== ip) return false;
+    try {
+      const t = new Date(r.time.replace(' ','T')).getTime();
+      return (now - t) <= h24;
+    } catch(e) { return false; }
+  });
 }
 
-// ── Upsert IP lên sheet (tìm dòng có name → update, không có → append) ────────
-async function upsertMyIp() {
-  const device = cfg.device||'Android';
-  const now    = new Date().toLocaleString('vi-VN');
-  const rows   = await sheetsGet('IP_History!A:A');
-  const names  = rows.map(r=>r[0]||'');
-  const rowIdx = names.indexOf(device); // 0-based trong array (bao gồm header)
-
-  if (rowIdx >= 1) {
-    // Dòng rowIdx trong array = dòng rowIdx+1 trên sheet (1-indexed)
-    await sheetsBatchUpdate(`IP_History!A${rowIdx+1}:C${rowIdx+1}`,
-      [[device, myIp, now]]);
-  } else {
-    await sheetsAppend('IP_History!A:C', [[device, myIp, now]]);
-  }
-  ipHistory[device] = myIp;
+// ── Append IP mới lên sheet (giống append vào ip_history.json) ───────────────
+async function appendMyIp() {
+  // Format datetime: YYYY-MM-DD HH:MM:SS (giống Python)
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const timeStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  await sheetsAppend('IP_History!A:B', [[myIp, timeStr]]);
+  // Cập nhật cache local
+  ipHistory.push({ip: myIp, time: timeStr});
   localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
 }
 
@@ -410,7 +447,7 @@ async function checkOnly() {
   setBtns(true);
   try {
     await loadIpHistory();
-    showResult(findDups(myIp));
+    showResult(isDup(myIp));
     renderHistory();
   } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
   finally { setBtns(false); }
@@ -426,26 +463,24 @@ async function checkAndPush() {
   setBtns(true);
   try {
     await loadIpHistory();
-    const dups = findDups(myIp);
-    await upsertMyIp();
-    showResult(dups);
+    const dup = isDup(myIp);
+    await appendMyIp();
+    showResult(dup);
     renderHistory();
-    toast(dups.length ? `⚠️ IP trùng với ${dups.length} profile!` : '✅ Đã ghi IP lên Sheet');
+    toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
   } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
   finally { setBtns(false); }
 }
 
-function showResult(dups) {
+function showResult(isDuplicate) {
   const el = document.getElementById('ip-status');
   const dd = document.getElementById('dup-detail');
-  if (!dups.length) {
-    el.innerHTML='<span class="status-badge badge-ok">✅ IP không trùng</span>';
+  if (!isDuplicate) {
+    el.innerHTML='<span class="status-badge badge-ok">✅ IP chưa xuất hiện trong 24h</span>';
     dd.style.display='none';
   } else {
-    el.innerHTML=`<span class="status-badge badge-dup">⚠️ TRÙNG với ${dups.length} profile</span>`;
-    document.getElementById('dup-list').innerHTML=
-      dups.map(n=>`<div class="ip-row"><div>${n}</div></div>`).join('');
-    dd.style.display='block';
+    el.innerHTML='<span class="status-badge badge-dup">⚠️ IP đã xuất hiện trong 24h gần đây!</span>';
+    dd.style.display='none';  // không cần hiện detail
   }
 }
 
@@ -465,14 +500,31 @@ function setBtns(d) {
 function renderHistory(filter='') {
   const el  = document.getElementById('history-list');
   const txt = filter.toLowerCase();
+  const now = Date.now();
+  const h24 = 24*60*60*1000;
   const ipCount = {};
-  for (const ip of Object.values(ipHistory)) ipCount[ip]=(ipCount[ip]||0)+1;
-  let entries = Object.entries(ipHistory);
-  if (txt) entries=entries.filter(([n,ip])=>n.toLowerCase().includes(txt)||ip.includes(txt));
-  if (!entries.length) {
+  for (const r of ipHistory) ipCount[r.ip]=(ipCount[r.ip]||0)+1;
+  let list = [...ipHistory];
+  if (txt) list=list.filter(r=>r.ip.includes(txt));
+  if (!list.length){
     el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không có dữ liệu</div>';
     return;
   }
+  list.sort((a,b)=>b.time.localeCompare(a.time));
+  el.innerHTML=list.map(r=>{
+    const dup=ipCount[r.ip]>1;
+    let in24=false;
+    try{const t=new Date(r.time.replace(' ','T')).getTime();in24=(now-t)<=h24;}catch(e){}
+    const color=dup?'var(--red)':(in24?'var(--warn)':'var(--text)');
+    return `<div class="ip-row">
+      <div>
+        <div style="font-size:14px;color:${color}">${r.ip}</div>
+        <div class="name">${r.time}</div>
+      </div>
+      <div class="${dup?'ip-dup':'ip-ok'}">${dup?'⚠️ TRÙNG':'✅'}</div>
+    </div>`;
+  }).join('');
+}
   entries.sort((a,b)=>(ipCount[b[1]]>1?1:0)-(ipCount[a[1]]>1?1:0));
   el.innerHTML=entries.map(([name,ip])=>{
     const dup=ipCount[ip]>1;
@@ -577,7 +629,7 @@ function showPage(id) {
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('nav button')[['home','history','profiles','settings'].indexOf(id)].classList.add('active');
   if (id==='history'&&!Object.keys(ipHistory).length) {
-    try{ipHistory=JSON.parse(localStorage.getItem('ipc_history')||'{}');}catch(e){}
+    try{ipHistory=JSON.parse(localStorage.getItem('ipc_history')||'[]');}catch(e){}
     renderHistory();
   }
   if (id==='profiles'&&!allProfiles.length) {
