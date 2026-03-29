@@ -10,212 +10,120 @@
 <meta name="apple-mobile-web-app-title" content="IP Checker">
 <title>IP Checker</title>
 <style>
-  :root {
-    --bg:    #0f0f0f;
-    --bg2:   #1a1a1a;
-    --bg3:   #242424;
-    --cyan:  #00e5ff;
-    --cyan2: #00acc1;
-    --green: #00e676;
-    --red:   #ff1744;
-    --warn:  #ffab00;
-    --text:  #e0e0e0;
-    --muted: #757575;
-    --r:     12px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
-    padding-bottom: 80px;
-  }
-
-  /* ── Header ── */
-  header {
-    background: var(--bg2);
-    padding: 16px 20px 12px;
-    border-bottom: 1px solid #222;
-    position: sticky; top: 0; z-index: 10;
-  }
-  header h1 { font-size: 18px; color: var(--cyan); font-weight: 600; }
-  header p  { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-  /* ── Nav tabs ── */
-  nav {
-    display: flex;
-    background: var(--bg2);
-    border-bottom: 1px solid #222;
-    position: sticky; top: 57px; z-index: 9;
-  }
-  nav button {
-    flex: 1; background: none; border: none; color: var(--muted);
-    padding: 12px 4px; font-size: 13px; cursor: pointer;
-    border-bottom: 2px solid transparent; transition: all .2s;
-  }
-  nav button.active { color: var(--cyan); border-bottom-color: var(--cyan); }
-
-  /* ── Pages ── */
-  .page { display: none; padding: 16px; }
-  .page.active { display: block; }
-
-  /* ── Card ── */
-  .card {
-    background: var(--bg2);
-    border-radius: var(--r);
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid #2a2a2a;
-  }
-  .card-title {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .8px;
-    color: var(--muted); margin-bottom: 10px;
-  }
-
-  /* ── IP display ── */
-  .ip-big {
-    font-size: 28px; font-weight: 700;
-    color: var(--cyan); letter-spacing: 1px;
-    margin: 6px 0;
-  }
-  .status-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 20px;
-    font-size: 13px; font-weight: 600; margin-top: 8px;
-  }
-  .badge-ok   { background: #00331a; color: var(--green); border: 1px solid var(--green); }
-  .badge-dup  { background: #330008; color: var(--red);   border: 1px solid var(--red); }
-  .badge-warn { background: #332200; color: var(--warn);  border: 1px solid var(--warn); }
-  .badge-load { background: #003040; color: var(--cyan);  border: 1px solid var(--cyan2); }
-
-  /* ── Button ── */
-  .btn {
-    width: 100%; padding: 13px; border-radius: var(--r);
-    border: none; font-size: 14px; font-weight: 600;
-    cursor: pointer; margin-bottom: 8px; transition: opacity .15s;
-  }
-  .btn:active { opacity: .7; }
-  .btn-primary { background: var(--cyan2); color: #000; }
-  .btn-outline {
-    background: transparent; color: var(--cyan);
-    border: 1px solid var(--cyan2);
-  }
-  .btn-danger  { background: #b71c1c; color: #fff; }
-  .btn:disabled { opacity: .35; cursor: not-allowed; }
-
-  /* ── Input ── */
-  .input-group { margin-bottom: 12px; }
-  .input-group label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
-  .input-group input, .input-group textarea {
-    width: 100%; background: var(--bg3); border: 1px solid #333;
-    border-radius: 8px; padding: 10px 12px; color: var(--text);
-    font-size: 14px; outline: none;
-  }
-  .input-group input:focus, .input-group textarea:focus {
-    border-color: var(--cyan2);
-  }
-  .input-group textarea { resize: vertical; min-height: 80px; font-family: monospace; }
-
-  /* ── List ── */
-  .ip-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 0; border-bottom: 1px solid #222;
-    font-size: 13px;
-  }
-  .ip-row:last-child { border-bottom: none; }
-  .ip-row .name { color: var(--muted); font-size: 12px; margin-top: 2px; }
-  .ip-dup { color: var(--red); font-size: 11px; font-weight: 600; }
-  .ip-ok  { color: var(--green); font-size: 11px; }
-
-  /* ── Profile card ── */
-  .profile-card {
-    background: var(--bg3); border-radius: 10px;
-    padding: 12px 14px; margin-bottom: 8px;
-    border-left: 3px solid var(--cyan2);
-  }
-  .profile-card .pname { font-size: 14px; font-weight: 600; color: var(--cyan); }
-  .profile-card .pinfo { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
-  .profile-card .pstatus {
-    font-size: 11px; font-weight: 600; margin-top: 6px;
-  }
-  .cancelled { color: var(--red); }
-  .delivered { color: var(--green); }
-  .pending   { color: var(--warn); }
-
-  /* ── Search ── */
-  .search-wrap { position: relative; margin-bottom: 12px; }
-  .search-wrap input {
-    width: 100%; background: var(--bg3); border: 1px solid #333;
-    border-radius: 8px; padding: 10px 12px 10px 36px;
-    color: var(--text); font-size: 14px; outline: none;
-  }
-  .search-wrap input:focus { border-color: var(--cyan2); }
-  .search-icon {
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-    color: var(--muted); font-size: 16px; pointer-events: none;
-  }
-
-  /* ── Toast ── */
-  #toast {
-    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
-    background: #333; color: #fff; padding: 10px 20px;
-    border-radius: 20px; font-size: 13px;
-    opacity: 0; transition: opacity .3s; z-index: 100;
-    white-space: nowrap; pointer-events: none;
-  }
-  #toast.show { opacity: 1; }
-
-  /* ── Settings ── */
-  .setting-hint { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
-  .divider { height: 1px; background: #222; margin: 16px 0; }
+:root{--bg:#0f0f0f;--bg2:#1a1a1a;--bg3:#242424;--cyan:#00e5ff;--cyan2:#00acc1;
+      --green:#00e676;--red:#ff1744;--warn:#ffab00;--text:#e0e0e0;--muted:#757575;--r:12px;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;
+     min-height:100vh;padding-bottom:80px;}
+header{background:var(--bg2);padding:16px 20px 12px;border-bottom:1px solid #222;
+       position:sticky;top:0;z-index:10;}
+header h1{font-size:18px;color:var(--cyan);font-weight:600;}
+header p{font-size:12px;color:var(--muted);margin-top:2px;}
+nav{display:flex;background:var(--bg2);border-bottom:1px solid #222;
+    position:sticky;top:57px;z-index:9;}
+nav button{flex:1;background:none;border:none;color:var(--muted);padding:12px 4px;
+           font-size:13px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+.page{display:none;padding:16px;}
+.page.active{display:block;}
+.card{background:var(--bg2);border-radius:var(--r);padding:16px;margin-bottom:12px;
+      border:1px solid #2a2a2a;}
+.card-title{font-size:11px;text-transform:uppercase;letter-spacing:.8px;
+            color:var(--muted);margin-bottom:10px;}
+.ip-big{font-size:28px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin:6px 0;}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;
+              border-radius:20px;font-size:13px;font-weight:600;margin-top:8px;}
+.badge-ok  {background:#00331a;color:var(--green);border:1px solid var(--green);}
+.badge-dup {background:#330008;color:var(--red);  border:1px solid var(--red);}
+.badge-warn{background:#332200;color:var(--warn); border:1px solid var(--warn);}
+.badge-load{background:#003040;color:var(--cyan); border:1px solid var(--cyan2);}
+.btn{width:100%;padding:13px;border-radius:var(--r);border:none;font-size:14px;
+     font-weight:600;cursor:pointer;margin-bottom:8px;transition:opacity .15s;}
+.btn:active{opacity:.7;}
+.btn-primary{background:var(--cyan2);color:#000;}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan2);}
+.btn-sm{padding:8px 14px;width:auto;font-size:13px;}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.input-group{margin-bottom:12px;}
+.input-group label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
+.input-group input,.input-group textarea{width:100%;background:var(--bg3);
+  border:1px solid #333;border-radius:8px;padding:10px 12px;color:var(--text);
+  font-size:14px;outline:none;}
+.input-group input:focus,.input-group textarea:focus{border-color:var(--cyan2);}
+.input-group textarea{resize:vertical;min-height:90px;font-family:monospace;font-size:12px;}
+.hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+.ip-row{display:flex;align-items:center;justify-content:space-between;
+        padding:10px 0;border-bottom:1px solid #222;font-size:13px;}
+.ip-row:last-child{border-bottom:none;}
+.ip-row .name{color:var(--muted);font-size:12px;margin-top:2px;}
+.ip-dup{color:var(--red);font-size:11px;font-weight:600;}
+.ip-ok {color:var(--green);font-size:11px;}
+.profile-card{background:var(--bg3);border-radius:10px;padding:12px 14px;
+              margin-bottom:8px;border-left:3px solid var(--cyan2);}
+.profile-card .pname{font-size:14px;font-weight:600;color:var(--cyan);}
+.profile-card .pinfo{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
+.profile-card .pstatus{font-size:11px;font-weight:600;margin-top:6px;}
+.cancelled{color:var(--red);} .delivered{color:var(--green);} .pending{color:var(--warn);}
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-wrap input{width:100%;background:var(--bg3);border:1px solid #333;
+  border-radius:8px;padding:10px 12px 10px 36px;color:var(--text);font-size:14px;outline:none;}
+.search-wrap input:focus{border-color:var(--cyan2);}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);
+             color:var(--muted);font-size:16px;pointer-events:none;}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+       background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;
+       opacity:0;transition:opacity .3s;z-index:100;white-space:nowrap;pointer-events:none;}
+#toast.show{opacity:1;}
+.divider{height:1px;background:#222;margin:16px 0;}
+.row-btns{display:flex;gap:8px;margin-bottom:8px;}
+.row-btns .btn{margin-bottom:0;}
+.cfg-status{font-size:12px;padding:6px 10px;border-radius:6px;margin-bottom:12px;}
+.cfg-ok  {background:#003010;color:var(--green);border:1px solid #005020;}
+.cfg-warn{background:#2a1800;color:var(--warn); border:1px solid #553000;}
 </style>
 </head>
 <body>
 
 <header>
   <h1>🌐 IP Checker</h1>
-  <p id="hdr-status">Đang tải...</p>
+  <p id="hdr-status">Đang khởi động...</p>
 </header>
 
 <nav>
-  <button class="active" onclick="showPage('home')">🏠 Trang chủ</button>
+  <button class="active" onclick="showPage('home')">🏠 Home</button>
   <button onclick="showPage('history')">📋 IP List</button>
   <button onclick="showPage('profiles')">👤 Profiles</button>
   <button onclick="showPage('settings')">⚙️ Cài đặt</button>
 </nav>
 
-<!-- ════════════════════ HOME ════════════════════ -->
+<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="card">
-    <div class="card-title">IP hiện tại của thiết bị</div>
+    <div class="card-title">IP hiện tại</div>
     <div class="ip-big" id="my-ip">...</div>
     <div id="ip-status"></div>
   </div>
-
   <button class="btn btn-primary" onclick="checkAndPush()" id="btn-check">
-    🔍 Kiểm tra & Ghi lên Sheet
+    🔍 Kiểm tra &amp; Ghi lên Sheet
   </button>
   <button class="btn btn-outline" onclick="checkOnly()" id="btn-checkonly">
     👁 Chỉ kiểm tra (không ghi)
   </button>
-
   <div class="card" id="dup-detail" style="display:none">
     <div class="card-title">⚠️ IP này đang dùng bởi</div>
     <div id="dup-list"></div>
   </div>
 </div>
 
-<!-- ════════════════════ HISTORY ════════════════════ -->
+<!-- IP LIST -->
 <div id="page-history" class="page">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="search-ip" placeholder="Tìm IP hoặc tên profile..."
-           oninput="filterHistory()">
+    <input type="text" id="search-ip" placeholder="Tìm IP hoặc tên..." oninput="filterHistory()">
   </div>
   <div id="history-list">
     <div style="color:var(--muted);text-align:center;padding:40px 0">
-      Chưa tải dữ liệu. Về trang chủ → Kiểm tra IP.
+      Chưa tải. Về Home → Kiểm tra IP.
     </div>
   </div>
   <button class="btn btn-outline" style="margin-top:8px" onclick="refreshHistory()">
@@ -223,7 +131,7 @@
   </button>
 </div>
 
-<!-- ════════════════════ PROFILES ════════════════════ -->
+<!-- PROFILES -->
 <div id="page-profiles" class="page">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
@@ -232,7 +140,7 @@
   </div>
   <div id="profile-list">
     <div style="color:var(--muted);text-align:center;padding:40px 0">
-      Chưa tải. Vào ⚙️ Cài đặt → Tải Profiles.
+      Chưa tải.
     </div>
   </div>
   <button class="btn btn-outline" style="margin-top:8px" onclick="loadProfiles()">
@@ -240,49 +148,37 @@
   </button>
 </div>
 
-<!-- ════════════════════ SETTINGS ════════════════════ -->
+<!-- SETTINGS -->
 <div id="page-settings" class="page">
   <div class="card">
-    <div class="card-title">Google Sheets API</div>
+    <div class="card-title">Cấu hình Google Sheets</div>
+    <div id="cfg-indicator" class="cfg-status cfg-warn">⚠️ Chưa cấu hình</div>
 
     <div class="input-group">
       <label>Spreadsheet ID</label>
-      <input type="text" id="cfg-sheet-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
-      <div class="setting-hint">Lấy từ URL: docs.google.com/spreadsheets/d/<b>ID</b>/edit</div>
+      <input type="text" id="cfg-sid" placeholder="Lấy từ URL của Google Sheet">
     </div>
-
     <div class="input-group">
-      <label>API Key <span style="color:var(--warn)">(read-only)</span>
-        hoặc Service Account JSON <span style="color:var(--green)">(read+write)</span>
-      </label>
-      <textarea id="cfg-api-key" placeholder='Dán API Key (chỉ đọc) hoặc nội dung file service_account.json (đọc+ghi)'></textarea>
-      <div class="setting-hint">
-        API Key: vào Google Cloud → Credentials → API Key → giới hạn Sheets API.<br>
-        Service Account JSON: dán nguyên nội dung file JSON (cho phép ghi IP lên Sheet).
-      </div>
+      <label>Service Account JSON <span style="color:var(--green)">(đọc + ghi)</span>
+        hoặc API Key <span style="color:var(--warn)">(chỉ đọc)</span></label>
+      <textarea id="cfg-key" placeholder="Dán nội dung file service_account.json&#10;hoặc API Key (AIza...)"></textarea>
+      <div class="hint">Service Account JSON cho phép ghi IP lên Sheet. API Key chỉ xem được.</div>
     </div>
-
     <div class="input-group">
-      <label>Tên thiết bị (hiển thị trên Sheet)</label>
-      <input type="text" id="cfg-device-name" placeholder="Android_01">
+      <label>Tên thiết bị</label>
+      <input type="text" id="cfg-device" placeholder="VD: Samsung_S23">
     </div>
 
-    <button class="btn btn-primary" onclick="saveSettings()">💾 Lưu cài đặt</button>
-    <button class="btn btn-outline" onclick="testConnection()">🔌 Test kết nối</button>
+    <div class="row-btns">
+      <button class="btn btn-primary btn-sm" onclick="saveSettings()">💾 Lưu</button>
+      <button class="btn btn-outline btn-sm" onclick="testConnection()">🔌 Test</button>
+      <button class="btn btn-outline btn-sm" onclick="clearCache()" style="color:var(--red);border-color:var(--red)">🗑 Xóa</button>
+    </div>
 
     <div class="divider"></div>
-    <div class="card-title">Cache local</div>
-    <button class="btn btn-danger" onclick="clearCache()">🗑️ Xoá cache & cài đặt</button>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Hướng dẫn nhanh</div>
-    <div class="setting-hint" style="font-size:12px;line-height:1.8">
-      1. Nhập Spreadsheet ID (cùng sheet với PC)<br>
-      2. Nhập API Key (chỉ xem) hoặc Service Account JSON (xem + ghi IP)<br>
-      3. Nhập tên thiết bị để phân biệt<br>
-      4. Lưu → Về trang chủ → Kiểm tra IP<br><br>
-      💡 Mở bằng Chrome → menu ⋮ → "Thêm vào màn hình chính" để dùng như app.
+    <div class="hint" style="line-height:1.9">
+      💡 Mở bằng Chrome → menu ⋮ → <b>Thêm vào màn hình chính</b> để dùng như app.<br>
+      💡 Sau khi lưu cài đặt lần đầu, app sẽ tự động kiểm tra IP mỗi lần mở.
     </div>
   </div>
 </div>
@@ -290,70 +186,72 @@
 <div id="toast"></div>
 
 <script>
-<<<<<<< HEAD
 // ══════════════════════════════════════════════════════════════════════════════
 // ★ CẤU HÌNH MẶC ĐỊNH – thay bằng thông tin thực (hoặc để trống, dùng cài đặt)
 // ══════════════════════════════════════════════════════════════════════════════
-const DEFAULT_SHEET_ID  = "1HGOPZy3PY2XM9F0PH1S8uPtePPuBlHfNplI_JbU_B4o";   // VD: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"
-const DEFAULT_API_KEY   = JSON.parse(`{
-  "type": "service_account",
-  "project_id": "bold-momentum-447217-i9",
-  "private_key_id": "a0b85c0b5c5c5031609dcccf3c2a64d5ac39a21a",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyKXtLRX0n+PPW\naVivjCCN+0FUaI+0UKMSekVcxU5PDOE9WxntcSZ9yWcvJRugJEL5Tbi4CQVLUVEG\ncoiTrp/3xgSu7bUIvultbgUZ+AbNU7DThWRlsef1PXIAK8fsTP26hwKfXivz4wYh\n1ovI4P3vU7J1jNdYA43GD4KsddPBFVkh0dzygyd69Jrg0UQfy31lVIb5cE2m5b4i\nRfTsvwJarQF4W2HCjMOVxu21vnUU8vWk2nPxcSNnxRHruodDVhOoZFW2z6N8x2oE\nRSJE32B55oNy2EDt70wtTQr0JmqEOYzkqXHOBuEemkLHk0CKOqC9ipLL0aBFSwrD\nInUPga5DAgMBAAECggEAF0EkgjEqQmQ+Hi+MRLGYyDTSP1G8kW/FsTzmE9NUbYCu\ntPhQpzY8ghuejRVIs1DjBbENhMah+xrnOrJgEvgD55k1oEg6TSTEyXnxpC+Zt7A4\n+uBE4qSONGuWQeEftxS045AJbsLMdYjIPUod3xTwSuOU/hSUQRKJrUn1/PZjiCaT\nh1FimezJMkpao5Pjwdaqd02d32GYpneTScOkcY8TmptAdly1GzRISPaFrOyCaNW/\nFs/O3GBEdR+iQ2CtW7Au/kw7AooftOqjwPdoXVZS5ioZ5bALAPxDNKhRpFMBJ50H\nIt7+yvGjL2L2M9dbIqaYCxEduWwirVyZJNeb+bbiIQKBgQDhP3o0B/cUvhlnX0Nf\nyzKYTJ+wUnwFjTh7aF6siBr3Wocb+1y+sIfEUsO4FdA4OvFRbWmUMFB6zw/fcQtl\na0wroU9ucyQANP7ScxF/Maby1y7c1FEWFMH61DU+XCRLRqCQWoIrDtLdf8Pk1NG6\nlJZ8CTWfRCFADgObc7X6w986owKBgQDKfFQ9mAq+y50cIprvXd3upixtHrAWUecb\nVQlrD/yjBNnTOXRYdxYLup3HJ/Kv1J6wuWqrRFu7/hAHYQ2wdGuv65J1JlumlMUs\n396rZb0B60ATcJ3ry+LwSZHztYB78hyF2jqehPjxycxPEgw8kEMGUFTJt0l2z5Q2\nUjglXPOX4QKBgGi7Iw7eRTwXx6gQ2zrHOBcoSXeqYpASQZjfxmViQ2ePaBLSpSTk\n37ug3+/P9Kiwf1PlE5obfNAdRrwVy760TQ5cSpqIXszZ10HyzsfdRkrTUq7K6Yji\nze7ajIcaQKXfiPiVnMB4fAMRTPwxF/Mw82dowM3016D44yR8gLjAKiMRAoGBAKp2\nKGUCDmm4+DarW0uP9jnmYxgp8YuYv7peyGL9Pm3us4ICqFOhTUnqfNEgbEph8IZO\nUeKE1cVZiRztM50NJWsgIlfFRvrh22x/uvEH4SowZez3rbrIFfC7vscwUU4G8MQu\nh5LT1s+WVw1p4CtMN2ClV/vI9Wu0LM3eQa4Spm+BAoGBAM/dTVQyKIO4s0ZYZzYi\nFCL4RRoQ6r5O33JX3q3BriMwnR4p1L7FkKV5jGHaNAln8a05cPnSWiXfjgYMAcpm\nU//0ey1m96Tju1rxbqQsrbOCQE4cxCt454UZmIgfOSIA/A0PWGURlUJHMUOxf0w5\nI9o+AOTs/zY2F4LL18zk4hAz\n-----END PRIVATE KEY-----\n",
-  "client_email": "ip-260@bold-momentum-447217-i9.iam.gserviceaccount.com",
-  "client_id": "110290022049246618994",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ip-260%40bold-momentum-447217-i9.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}`);   // Dán nội dung JSON hoặc API Key
+const DEFAULT_SHEET_ID  = "";   // VD: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"
+const DEFAULT_API_KEY   = "";   // Dán nội dung JSON hoặc API Key
 const DEFAULT_DEVICE    = "Android";
 // ══════════════════════════════════════════════════════════════════════════════
 
-=======
-// ── State ─────────────────────────────────────────────────────────────────────
->>>>>>> parent of 8dea87f (up)
 let cfg = {};
-let ipHistory = {};      // {name: ip}
-let allProfiles = [];
+let ipHistory  = {};
+let allProfiles= [];
 let myIp = null;
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 window.onload = async () => {
   loadConfig();
-  updateHeaderStatus();
+  updateCfgIndicator();
+  updateHdrStatus();
   await getMyIp();
-  // Auto-check nếu đã cấu hình
   if (isConfigured()) {
     await checkOnly();
   }
 };
 
 function loadConfig() {
-  try {
-    cfg = JSON.parse(localStorage.getItem('ipc_cfg') || '{}');
-    document.getElementById('cfg-sheet-id').value   = cfg.sheetId || '';
-    document.getElementById('cfg-api-key').value    = cfg.apiKey  || '';
-    document.getElementById('cfg-device-name').value= cfg.device  || '';
-  } catch(e) {}
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('ipc_cfg') || '{}'); } catch(e){}
+  cfg = {
+    sheetId: saved.sheetId || DEFAULT_SHEET_ID,
+    apiKey:  saved.apiKey  || DEFAULT_API_KEY,
+    device:  saved.device  || DEFAULT_DEVICE,
+  };
+  document.getElementById('cfg-sid').value    = saved.sheetId || '';
+  document.getElementById('cfg-key').value    = saved.apiKey  || '';
+  document.getElementById('cfg-device').value = saved.device  || '';
 }
 
 function saveSettings() {
-  cfg = {
-    sheetId: document.getElementById('cfg-sheet-id').value.trim(),
-    apiKey:  document.getElementById('cfg-api-key').value.trim(),
-    device:  document.getElementById('cfg-device-name').value.trim() || 'Android',
-  };
-  localStorage.setItem('ipc_cfg', JSON.stringify(cfg));
+  const sid = document.getElementById('cfg-sid').value.trim();
+  const key = document.getElementById('cfg-key').value.trim();
+  const dev = document.getElementById('cfg-device').value.trim();
+  // Lưu vào localStorage (ghi đè default nếu có giá trị)
+  const saved = {};
+  if (sid) saved.sheetId = sid;
+  if (key) saved.apiKey  = key;
+  if (dev) saved.device  = dev;
+  localStorage.setItem('ipc_cfg', JSON.stringify(saved));
+  // Reload cfg (merge với default)
+  loadConfig();
+  updateCfgIndicator();
+  updateHdrStatus();
+  // Reset token cache khi đổi key
+  sessionStorage.removeItem('_token');
+  sessionStorage.removeItem('_token_exp');
   toast('✅ Đã lưu cài đặt');
-  updateHeaderStatus();
 }
 
 function clearCache() {
-  if (!confirm('Xoá toàn bộ cài đặt và cache?')) return;
-  localStorage.clear();
+  if (!confirm('Xoá cache & cài đặt đã lưu? (Cài đặt mặc định trong code vẫn còn)')) return;
+  localStorage.removeItem('ipc_cfg');
+  localStorage.removeItem('ipc_history');
+  localStorage.removeItem('ipc_profiles');
+  sessionStorage.clear();
   ipHistory = {}; allProfiles = []; myIp = null;
+  loadConfig();
+  updateCfgIndicator();
   location.reload();
 }
 
@@ -361,307 +259,234 @@ function isConfigured() {
   return !!(cfg.sheetId && cfg.apiKey);
 }
 
-function updateHeaderStatus() {
-  document.getElementById('hdr-status').textContent =
-    isConfigured() ? `Sheet: ${cfg.sheetId.slice(0,20)}...` : 'Chưa cấu hình – vào ⚙️ Cài đặt';
+function updateCfgIndicator() {
+  const el = document.getElementById('cfg-indicator');
+  if (isConfigured()) {
+    el.className = 'cfg-status cfg-ok';
+    el.textContent = '✅ Đã cấu hình' + (DEFAULT_SHEET_ID ? ' (mặc định)' : ' (tùy chỉnh)');
+  } else {
+    el.className = 'cfg-status cfg-warn';
+    el.textContent = '⚠️ Chưa cấu hình – điền Spreadsheet ID và API Key bên dưới';
+  }
 }
 
-// ── Google Sheets API ─────────────────────────────────────────────────────────
-function isServiceAccount() {
+function updateHdrStatus() {
+  document.getElementById('hdr-status').textContent =
+    isConfigured()
+      ? `Sheet: ${cfg.sheetId.slice(0,24)}...`
+      : 'Chưa cấu hình – vào ⚙️ Cài đặt';
+}
+
+// ── Sheets API ────────────────────────────────────────────────────────────────
+function isSA() {
   try { JSON.parse(cfg.apiKey); return true; } catch(e) { return false; }
 }
 
-// Đọc sheet bằng API Key hoặc Service Account (qua fetch với access token)
 async function sheetsGet(range) {
   if (!isConfigured()) throw new Error('Chưa cấu hình');
-
-  if (!isServiceAccount()) {
-    // API Key – read only
+  if (!isSA()) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}?key=${cfg.apiKey}`;
     const r = await fetch(url);
-    if (!r.ok) throw new Error(`Sheets API error: ${r.status}`);
-    return (await r.json()).values || [];
-  } else {
-    // Service Account – cần access token
-    const token = await getAccessToken();
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}`;
-    const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-    if (!r.ok) throw new Error(`Sheets API error: ${r.status}`);
+    if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
     return (await r.json()).values || [];
   }
-}
-
-async function sheetsAppend(range, values) {
-  // Append rows – cần Service Account
-  if (!isServiceAccount()) throw new Error('Cần Service Account JSON để ghi lên Sheet');
   const token = await getAccessToken();
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ values }),
-  });
-  if (!r.ok) {
-    const err = await r.json();
-    throw new Error(err.error?.message || `Sheets write error: ${r.status}`);
-  }
-  return await r.json();
-}
-
-async function sheetsClear(range) {
-  if (!isServiceAccount()) throw new Error('Cần Service Account JSON');
-  const token = await getAccessToken();
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}:clear`;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!r.ok) throw new Error(`Clear error: ${r.status}`);
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}`;
+  const r = await fetch(url, {headers:{Authorization:`Bearer ${token}`}});
+  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
+  return (await r.json()).values || [];
 }
 
 async function sheetsBatchUpdate(range, values) {
-  if (!isServiceAccount()) throw new Error('Cần Service Account JSON');
+  if (!isSA()) throw new Error('Cần Service Account JSON để ghi');
   const token = await getAccessToken();
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values:batchUpdate`;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      valueInputOption: 'USER_ENTERED',
-      data: [{ range, values }],
-    }),
-  });
-  if (!r.ok) throw new Error(`Batch update error: ${r.status}`);
+  const r = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values:batchUpdate`,
+    {
+      method:'POST',
+      headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
+      body:JSON.stringify({valueInputOption:'USER_ENTERED',data:[{range,values}]}),
+    }
+  );
+  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
 }
 
-// ── Service Account JWT → Access Token ───────────────────────────────────────
-// Dùng Web Crypto API (có sẵn trên Chrome Android)
+async function sheetsAppend(range, values) {
+  if (!isSA()) throw new Error('Cần Service Account JSON để ghi');
+  const token = await getAccessToken();
+  const r = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+    {
+      method:'POST',
+      headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
+      body:JSON.stringify({values}),
+    }
+  );
+  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
+}
+
+// ── JWT / Access Token ────────────────────────────────────────────────────────
 async function getAccessToken() {
   const cached = sessionStorage.getItem('_token');
-  const exp    = parseInt(sessionStorage.getItem('_token_exp') || '0');
+  const exp    = parseInt(sessionStorage.getItem('_token_exp')||'0');
   if (cached && Date.now() < exp) return cached;
 
-  const sa = JSON.parse(cfg.apiKey);
-  const now = Math.floor(Date.now() / 1000);
-  const header  = { alg: 'RS256', typ: 'JWT' };
-  const payload = {
-    iss: sa.client_email,
-    scope: 'https://www.googleapis.com/auth/spreadsheets',
-    aud: 'https://oauth2.googleapis.com/token',
-    iat: now, exp: now + 3600,
-  };
+  const sa  = JSON.parse(cfg.apiKey);
+  const now = Math.floor(Date.now()/1000);
+  const b64 = o => btoa(JSON.stringify(o)).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  const hdr = {alg:'RS256',typ:'JWT'};
+  const pay = {iss:sa.client_email,scope:'https://www.googleapis.com/auth/spreadsheets',
+               aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3600};
+  const si  = `${b64(hdr)}.${b64(pay)}`;
 
-  const b64 = (obj) => btoa(JSON.stringify(obj))
-    .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-  const sigInput = `${b64(header)}.${b64(payload)}`;
+  const pemBody = sa.private_key.replace(/-----[^-]+-----/g,'').replace(/\s/g,'');
+  const keyDer  = Uint8Array.from(atob(pemBody),c=>c.charCodeAt(0));
+  const key     = await crypto.subtle.importKey('pkcs8',keyDer,
+    {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
+  const sigBuf  = await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(si));
+  const sig     = btoa(String.fromCharCode(...new Uint8Array(sigBuf)))
+    .replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
 
-  // Import RSA private key
-  const pemBody = sa.private_key
-    .replace(/-----BEGIN PRIVATE KEY-----/, '')
-    .replace(/-----END PRIVATE KEY-----/, '')
-    .replace(/\s/g, '');
-  const keyDer  = Uint8Array.from(atob(pemBody), c => c.charCodeAt(0));
-  const cryptoKey = await crypto.subtle.importKey(
-    'pkcs8', keyDer,
-    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
-    false, ['sign']
-  );
-  const sigBuf = await crypto.subtle.sign(
-    'RSASSA-PKCS1-v1_5', cryptoKey,
-    new TextEncoder().encode(sigInput)
-  );
-  const sig = btoa(String.fromCharCode(...new Uint8Array(sigBuf)))
-    .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-
-  const jwt = `${sigInput}.${sig}`;
-  const resp = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
+  const resp = await fetch('https://oauth2.googleapis.com/token',{
+    method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:`grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${si}.${sig}`,
   });
   const data = await resp.json();
-  if (!data.access_token) throw new Error('Không lấy được access token: ' + JSON.stringify(data));
+  if (!data.access_token) throw new Error('Token error: '+JSON.stringify(data));
   sessionStorage.setItem('_token', data.access_token);
-  sessionStorage.setItem('_token_exp', String((now + 3500) * 1000));
+  sessionStorage.setItem('_token_exp', String((now+3500)*1000));
   return data.access_token;
 }
 
-// ── Lấy IP của thiết bị ───────────────────────────────────────────────────────
+// ── IP helpers ────────────────────────────────────────────────────────────────
 async function getMyIp() {
-  document.getElementById('my-ip').textContent = '⏳';
-  try {
-    const r = await fetch('https://api.ipify.org?format=json');
-    myIp = (await r.json()).ip;
-  } catch(e) {
-    try {
-      const r = await fetch('https://api.myip.com');
-      myIp = (await r.json()).ip;
-    } catch(e2) {
-      myIp = null;
-    }
+  document.getElementById('my-ip').textContent='⏳';
+  try { myIp=(await(await fetch('https://api.ipify.org?format=json')).json()).ip; }
+  catch(e) {
+    try { myIp=(await(await fetch('https://api.myip.com')).json()).ip; }
+    catch(e2) { myIp=null; }
   }
-  document.getElementById('my-ip').textContent = myIp || '(Không lấy được IP)';
-  return myIp;
+  document.getElementById('my-ip').textContent = myIp||'(Không lấy được)';
 }
 
-// ── Load IP History từ Sheet ──────────────────────────────────────────────────
 async function loadIpHistory() {
   const rows = await sheetsGet('IP_History!A:C');
-  ipHistory = {};
-  for (const row of rows.slice(1)) {
-    if (row[0] && row[1]) ipHistory[row[0]] = row[1];
+  ipHistory  = {};
+  for (const r of rows.slice(1)) {
+    if (r[0]&&r[1]) ipHistory[r[0]]=r[1];
   }
-  // Lưu cache local
   localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
-  return ipHistory;
 }
 
-// ── Kiểm tra IP trùng ────────────────────────────────────────────────────────
-function findDuplicates(ip) {
-  return Object.entries(ipHistory).filter(([, v]) => v === ip).map(([k]) => k);
+function findDups(ip) {
+  return Object.entries(ipHistory).filter(([,v])=>v===ip).map(([k])=>k);
 }
 
+// ── Upsert IP lên sheet (tìm dòng có name → update, không có → append) ────────
+async function upsertMyIp() {
+  const device = cfg.device||'Android';
+  const now    = new Date().toLocaleString('vi-VN');
+  const rows   = await sheetsGet('IP_History!A:A');
+  const names  = rows.map(r=>r[0]||'');
+  const rowIdx = names.indexOf(device); // 0-based trong array (bao gồm header)
+
+  if (rowIdx >= 1) {
+    // Dòng rowIdx trong array = dòng rowIdx+1 trên sheet (1-indexed)
+    await sheetsBatchUpdate(`IP_History!A${rowIdx+1}:C${rowIdx+1}`,
+      [[device, myIp, now]]);
+  } else {
+    await sheetsAppend('IP_History!A:C', [[device, myIp, now]]);
+  }
+  ipHistory[device] = myIp;
+  localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
 async function checkOnly() {
   if (!myIp) await getMyIp();
-  if (!myIp) { showStatus('warn', '⚠️ Không lấy được IP'); return; }
-
-  showStatus('load', '⏳ Đang kiểm tra...');
+  if (!myIp) { showStatus('warn','⚠️ Không lấy được IP'); return; }
+  if (!isConfigured()) { showStatus('warn','⚠️ Chưa cấu hình Sheet'); return; }
+  showStatus('load','⏳ Đang kiểm tra...');
   setBtns(true);
-
   try {
     await loadIpHistory();
-    const dups = findDuplicates(myIp);
-    showCheckResult(dups);
+    showResult(findDups(myIp));
     renderHistory();
-  } catch(e) {
-    showStatus('warn', `⚠️ Lỗi: ${e.message}`);
-  } finally {
-    setBtns(false);
-  }
+  } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
+  finally { setBtns(false); }
 }
 
 async function checkAndPush() {
   if (!myIp) await getMyIp();
-  if (!myIp) { showStatus('warn', '⚠️ Không lấy được IP'); return; }
-  if (!isServiceAccount()) {
-    toast('⚠️ Cần Service Account JSON để ghi lên Sheet');
-    await checkOnly();
-    return;
-  }
+  if (!myIp) { showStatus('warn','⚠️ Không lấy được IP'); return; }
+  if (!isConfigured()) { showStatus('warn','⚠️ Chưa cấu hình Sheet'); return; }
+  if (!isSA()) { toast('⚠️ Cần Service Account JSON để ghi'); await checkOnly(); return; }
 
-  showStatus('load', '⏳ Đang kiểm tra & ghi lên Sheet...');
+  showStatus('load','⏳ Kiểm tra & ghi lên Sheet...');
   setBtns(true);
-
   try {
     await loadIpHistory();
-    const dups = findDuplicates(myIp);
-
-    // Ghi lên sheet (upsert: nếu device đã có thì cập nhật, không thì thêm mới)
-    await pushMyIp();
-    showCheckResult(dups);
+    const dups = findDups(myIp);
+    await upsertMyIp();
+    showResult(dups);
     renderHistory();
-
-    if (dups.length === 0) toast('✅ Đã ghi IP lên Sheet');
-    else toast(`⚠️ IP trùng với ${dups.length} profile!`);
-  } catch(e) {
-    showStatus('warn', `⚠️ Lỗi: ${e.message}`);
-  } finally {
-    setBtns(false);
-  }
+    toast(dups.length ? `⚠️ IP trùng với ${dups.length} profile!` : '✅ Đã ghi IP lên Sheet');
+  } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
+  finally { setBtns(false); }
 }
 
-async function pushMyIp() {
-  // Đọc toàn bộ sheet hiện tại
-  const rows  = await sheetsGet('IP_History!A:C');
-  const now   = new Date().toLocaleString('vi-VN');
-  const device= cfg.device || 'Android';
-  const key   = device; // dùng device name làm profile_name cho Android
-
-  // Tìm xem device này đã có dòng chưa
-  let found = -1;
-  for (let i = 1; i < rows.length; i++) {
-    if (rows[i][0] === key) { found = i; break; }
-  }
-
-  if (found >= 0) {
-    // Update dòng đó (row index trên sheet = found + 1, 1-indexed)
-    await sheetsBatchUpdate(`IP_History!A${found + 1}:C${found + 1}`,
-      [[key, myIp, now]]);
-  } else {
-    // Append dòng mới
-    await sheetsAppend('IP_History!A:C', [[key, myIp, now]]);
-  }
-  // Cập nhật cache local
-  ipHistory[key] = myIp;
-}
-
-function showCheckResult(dups) {
+function showResult(dups) {
   const el = document.getElementById('ip-status');
   const dd = document.getElementById('dup-detail');
-  const dl = document.getElementById('dup-list');
-
-  if (dups.length === 0) {
-    el.innerHTML = '<span class="status-badge badge-ok">✅ IP không trùng</span>';
-    dd.style.display = 'none';
+  if (!dups.length) {
+    el.innerHTML='<span class="status-badge badge-ok">✅ IP không trùng</span>';
+    dd.style.display='none';
   } else {
-    el.innerHTML = `<span class="status-badge badge-dup">⚠️ TRÙNG IP với ${dups.length} profile</span>`;
-    dl.innerHTML = dups.map(n =>
-      `<div class="ip-row"><div>${n}</div></div>`
-    ).join('');
-    dd.style.display = 'block';
+    el.innerHTML=`<span class="status-badge badge-dup">⚠️ TRÙNG với ${dups.length} profile</span>`;
+    document.getElementById('dup-list').innerHTML=
+      dups.map(n=>`<div class="ip-row"><div>${n}</div></div>`).join('');
+    dd.style.display='block';
   }
 }
 
-function showStatus(type, msg) {
-  const el = document.getElementById('ip-status');
-  const cls = { load: 'badge-load', ok: 'badge-ok', dup: 'badge-dup', warn: 'badge-warn' }[type] || '';
-  el.innerHTML = `<span class="status-badge ${cls}">${msg}</span>`;
-  document.getElementById('dup-detail').style.display = 'none';
+function showStatus(type,msg) {
+  const cls={load:'badge-load',ok:'badge-ok',dup:'badge-dup',warn:'badge-warn'}[type]||'';
+  document.getElementById('ip-status').innerHTML=
+    `<span class="status-badge ${cls}">${msg}</span>`;
+  document.getElementById('dup-detail').style.display='none';
 }
 
-function setBtns(disabled) {
-  document.getElementById('btn-check').disabled    = disabled;
-  document.getElementById('btn-checkonly').disabled= disabled;
+function setBtns(d) {
+  document.getElementById('btn-check').disabled=d;
+  document.getElementById('btn-checkonly').disabled=d;
 }
 
-// ── Render IP History ─────────────────────────────────────────────────────────
-function renderHistory(filter = '') {
+// ── Render IP list ────────────────────────────────────────────────────────────
+function renderHistory(filter='') {
   const el  = document.getElementById('history-list');
   const txt = filter.toLowerCase();
-  // Đếm số lần xuất hiện của mỗi IP
   const ipCount = {};
-  for (const ip of Object.values(ipHistory)) {
-    ipCount[ip] = (ipCount[ip] || 0) + 1;
-  }
-
+  for (const ip of Object.values(ipHistory)) ipCount[ip]=(ipCount[ip]||0)+1;
   let entries = Object.entries(ipHistory);
-  if (txt) entries = entries.filter(([n, ip]) =>
-    n.toLowerCase().includes(txt) || ip.includes(txt));
-
+  if (txt) entries=entries.filter(([n,ip])=>n.toLowerCase().includes(txt)||ip.includes(txt));
   if (!entries.length) {
-    el.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px 0">Không có dữ liệu</div>';
+    el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không có dữ liệu</div>';
     return;
   }
-
-  // Sắp xếp: IP trùng lên đầu
-  entries.sort((a, b) => (ipCount[b[1]] > 1 ? 1 : 0) - (ipCount[a[1]] > 1 ? 1 : 0));
-
-  el.innerHTML = entries.map(([name, ip]) => {
-    const dup = ipCount[ip] > 1;
-    return `
-      <div class="ip-row">
-        <div>
-          <div style="font-size:14px;color:${dup ? 'var(--red)' : 'var(--text)'}">${ip}</div>
-          <div class="name">${name}</div>
-        </div>
-        <div class="${dup ? 'ip-dup' : 'ip-ok'}">${dup ? '⚠️ TRÙNG' : '✅'}</div>
-      </div>`;
+  entries.sort((a,b)=>(ipCount[b[1]]>1?1:0)-(ipCount[a[1]]>1?1:0));
+  el.innerHTML=entries.map(([name,ip])=>{
+    const dup=ipCount[ip]>1;
+    return `<div class="ip-row">
+      <div>
+        <div style="font-size:14px;color:${dup?'var(--red)':'var(--text)'}">${ip}</div>
+        <div class="name">${name}</div>
+      </div>
+      <div class="${dup?'ip-dup':'ip-ok'}">${dup?'⚠️ TRÙNG':'✅'}</div>
+    </div>`;
   }).join('');
 }
 
-function filterHistory() {
-  renderHistory(document.getElementById('search-ip').value);
-}
+function filterHistory(){ renderHistory(document.getElementById('search-ip').value); }
 
 async function refreshHistory() {
   if (!isConfigured()) { toast('Chưa cấu hình'); return; }
@@ -669,123 +494,103 @@ async function refreshHistory() {
     await loadIpHistory();
     renderHistory(document.getElementById('search-ip').value);
     toast('✅ Đã làm mới');
-  } catch(e) {
-    toast('❌ ' + e.message);
-  }
+  } catch(e) { toast('❌ '+e.message); }
 }
 
 // ── Profiles ──────────────────────────────────────────────────────────────────
 async function loadProfiles() {
   if (!isConfigured()) { toast('Chưa cấu hình'); return; }
-  const el = document.getElementById('profile-list');
-  el.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px">⏳ Đang tải...</div>';
+  const el=document.getElementById('profile-list');
+  el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">⏳ Đang tải...</div>';
   try {
-    const rows = await sheetsGet('Profiles!A:AH');
-    if (rows.length < 2) { el.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px">Sheet Profiles trống</div>'; return; }
-    const header = rows[0];
-    const idx = (name) => header.indexOf(name);
-    allProfiles = rows.slice(1).filter(r => r[0]).map(r => ({
-      name:            r[idx('name')]            || '',
-      shop_name:       r[idx('shop_name')]        || '',
-      product_name:    r[idx('product_name')]     || '',
-      tracking_code:   r[idx('tracking_code')]    || '',
-      phone_number:    r[idx('phone_number')]     || '',
-      delivery_status: r[idx('delivery_status')]  || '',
-      price:           r[idx('price')]            || '',
-      address:         r[idx('address')]          || '',
-      order_id:        r[idx('order_id')]         || '',
+    const rows=await sheetsGet('Profiles!A:AH');
+    if (rows.length<2){ el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">Sheet trống</div>'; return; }
+    const hdr=rows[0];
+    const idx=n=>hdr.indexOf(n);
+    allProfiles=rows.slice(1).filter(r=>r[0]).map(r=>({
+      name:           r[idx('name')]||'',
+      shop_name:      r[idx('shop_name')]||'',
+      product_name:   r[idx('product_name')]||'',
+      tracking_code:  r[idx('tracking_code')]||'',
+      phone_number:   r[idx('phone_number')]||'',
+      delivery_status:r[idx('delivery_status')]||'',
+      price:          r[idx('price')]||'',
+      address:        r[idx('address')]||'',
+      order_id:       r[idx('order_id')]||'',
     }));
-    localStorage.setItem('ipc_profiles', JSON.stringify(allProfiles));
+    localStorage.setItem('ipc_profiles',JSON.stringify(allProfiles));
     renderProfiles();
-    toast(`✅ Tải ${allProfiles.length} profiles`);
+    toast(`✅ ${allProfiles.length} profiles`);
   } catch(e) {
-    el.innerHTML = `<div style="color:var(--red);padding:20px">❌ ${e.message}</div>`;
+    el.innerHTML=`<div style="color:var(--red);padding:20px">❌ ${e.message}</div>`;
   }
 }
 
-function renderProfiles(filter = '') {
-  const el  = document.getElementById('profile-list');
-  const txt = filter.toLowerCase();
-  let list  = allProfiles;
-  if (txt) list = list.filter(p =>
-    p.name.toLowerCase().includes(txt) ||
-    (p.shop_name || '').toLowerCase().includes(txt) ||
-    (p.tracking_code || '').toLowerCase().includes(txt) ||
-    (p.phone_number || '').includes(txt)
+function renderProfiles(filter='') {
+  const el=document.getElementById('profile-list');
+  const txt=filter.toLowerCase();
+  let list=allProfiles;
+  if (txt) list=list.filter(p=>
+    p.name.toLowerCase().includes(txt)||
+    (p.shop_name||'').toLowerCase().includes(txt)||
+    (p.tracking_code||'').toLowerCase().includes(txt)||
+    (p.phone_number||'').includes(txt)
   );
-
-  if (!list.length) {
-    el.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px 0">Không tìm thấy</div>';
+  if (!list.length){
+    el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không tìm thấy</div>';
     return;
   }
-
-  const statusClass = (s) => {
-    s = (s || '').toLowerCase();
-    if (s.includes('huỷ') || s.includes('cancel')) return 'cancelled';
-    if (s.includes('giao thành công') || s.includes('delivered')) return 'delivered';
-    return 'pending';
-  };
-
-  el.innerHTML = list.map(p => `
+  const sc=s=>{s=(s||'').toLowerCase();
+    if(s.includes('huỷ')||s.includes('cancel')) return 'cancelled';
+    if(s.includes('giao thành công')||s.includes('delivered')) return 'delivered';
+    return 'pending';};
+  el.innerHTML=list.map(p=>`
     <div class="profile-card">
       <div class="pname">${p.name}</div>
       <div class="pinfo">
-        🏪 ${p.shop_name || '—'}<br>
-        📦 ${(p.product_name || '—').slice(0, 60)}<br>
-        🚚 ${p.tracking_code || '—'}<br>
-        📞 ${p.phone_number || '—'}<br>
-        💰 ${p.price || '—'}
+        🏪 ${p.shop_name||'—'}<br>
+        📦 ${(p.product_name||'—').slice(0,60)}<br>
+        🚚 ${p.tracking_code||'—'}<br>
+        📞 ${p.phone_number||'—'}<br>
+        💰 ${p.price||'—'}
       </div>
-      ${p.delivery_status
-        ? `<div class="pstatus ${statusClass(p.delivery_status)}">
-             📍 ${p.delivery_status}
-           </div>`
-        : ''}
-    </div>
-  `).join('');
+      ${p.delivery_status?`<div class="pstatus ${sc(p.delivery_status)}">📍 ${p.delivery_status}</div>`:''}
+    </div>`).join('');
 }
 
-function filterProfiles() {
-  renderProfiles(document.getElementById('search-profile').value);
-}
+function filterProfiles(){ renderProfiles(document.getElementById('search-profile').value); }
 
-// ── Test kết nối ──────────────────────────────────────────────────────────────
+// ── Test ──────────────────────────────────────────────────────────────────────
 async function testConnection() {
   if (!isConfigured()) { toast('Chưa cấu hình'); return; }
   toast('⏳ Đang test...');
   try {
-    const rows = await sheetsGet('IP_History!A1:A1');
+    await sheetsGet('IP_History!A1');
     toast('✅ Kết nối thành công!');
-  } catch(e) {
-    toast('❌ ' + e.message);
-  }
+  } catch(e) { toast('❌ '+e.message); }
 }
 
-// ── Navigation ────────────────────────────────────────────────────────────────
+// ── Nav ───────────────────────────────────────────────────────────────────────
 function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  const idx = ['home','history','profiles','settings'].indexOf(id);
-  document.querySelectorAll('nav button')[idx].classList.add('active');
-
-  // Load cached data khi chuyển tab
-  if (id === 'history' && !Object.keys(ipHistory).length) {
-    try { ipHistory = JSON.parse(localStorage.getItem('ipc_history') || '{}'); } catch(e){}
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('nav button')[['home','history','profiles','settings'].indexOf(id)].classList.add('active');
+  if (id==='history'&&!Object.keys(ipHistory).length) {
+    try{ipHistory=JSON.parse(localStorage.getItem('ipc_history')||'{}');}catch(e){}
     renderHistory();
   }
-  if (id === 'profiles' && !allProfiles.length) {
-    try { allProfiles = JSON.parse(localStorage.getItem('ipc_profiles') || '[]'); } catch(e){}
-    if (allProfiles.length) renderProfiles();
+  if (id==='profiles'&&!allProfiles.length) {
+    try{allProfiles=JSON.parse(localStorage.getItem('ipc_profiles')||'[]');}catch(e){}
+    if(allProfiles.length) renderProfiles();
   }
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2500);
 }
 </script>
 </body>
