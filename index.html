@@ -189,8 +189,21 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
 // ══════════════════════════════════════════════════════════════════════════════
 // ★ CẤU HÌNH MẶC ĐỊNH – thay bằng thông tin thực (hoặc để trống, dùng cài đặt)
 // ══════════════════════════════════════════════════════════════════════════════
-const DEFAULT_SHEET_ID  = "";   // VD: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"
-const DEFAULT_API_KEY   = "";   // Dán nội dung JSON hoặc API Key
+const DEFAULT_SHEET_ID  = "1HGOPZy3PY2XM9F0PH1S8uPtePPuBlHfNplI_JbU_B4o";   // VD: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"
+const DEFAULT_API_KEY   = `{
+  "type": "service_account",
+  "project_id": "bold-momentum-447217-i9",
+  "private_key_id": "a0b85c0b5c5c5031609dcccf3c2a64d5ac39a21a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyKXtLRX0n+PPW\naVivjCCN+0FUaI+0UKMSekVcxU5PDOE9WxntcSZ9yWcvJRugJEL5Tbi4CQVLUVEG\ncoiTrp/3xgSu7bUIvultbgUZ+AbNU7DThWRlsef1PXIAK8fsTP26hwKfXivz4wYh\n1ovI4P3vU7J1jNdYA43GD4KsddPBFVkh0dzygyd69Jrg0UQfy31lVIb5cE2m5b4i\nRfTsvwJarQF4W2HCjMOVxu21vnUU8vWk2nPxcSNnxRHruodDVhOoZFW2z6N8x2oE\nRSJE32B55oNy2EDt70wtTQr0JmqEOYzkqXHOBuEemkLHk0CKOqC9ipLL0aBFSwrD\nInUPga5DAgMBAAECggEAF0EkgjEqQmQ+Hi+MRLGYyDTSP1G8kW/FsTzmE9NUbYCu\ntPhQpzY8ghuejRVIs1DjBbENhMah+xrnOrJgEvgD55k1oEg6TSTEyXnxpC+Zt7A4\n+uBE4qSONGuWQeEftxS045AJbsLMdYjIPUod3xTwSuOU/hSUQRKJrUn1/PZjiCaT\nh1FimezJMkpao5Pjwdaqd02d32GYpneTScOkcY8TmptAdly1GzRISPaFrOyCaNW/\nFs/O3GBEdR+iQ2CtW7Au/kw7AooftOqjwPdoXVZS5ioZ5bALAPxDNKhRpFMBJ50H\nIt7+yvGjL2L2M9dbIqaYCxEduWwirVyZJNeb+bbiIQKBgQDhP3o0B/cUvhlnX0Nf\nyzKYTJ+wUnwFjTh7aF6siBr3Wocb+1y+sIfEUsO4FdA4OvFRbWmUMFB6zw/fcQtl\na0wroU9ucyQANP7ScxF/Maby1y7c1FEWFMH61DU+XCRLRqCQWoIrDtLdf8Pk1NG6\nlJZ8CTWfRCFADgObc7X6w986owKBgQDKfFQ9mAq+y50cIprvXd3upixtHrAWUecb\nVQlrD/yjBNnTOXRYdxYLup3HJ/Kv1J6wuWqrRFu7/hAHYQ2wdGuv65J1JlumlMUs\n396rZb0B60ATcJ3ry+LwSZHztYB78hyF2jqehPjxycxPEgw8kEMGUFTJt0l2z5Q2\nUjglXPOX4QKBgGi7Iw7eRTwXx6gQ2zrHOBcoSXeqYpASQZjfxmViQ2ePaBLSpSTk\n37ug3+/P9Kiwf1PlE5obfNAdRrwVy760TQ5cSpqIXszZ10HyzsfdRkrTUq7K6Yji\nze7ajIcaQKXfiPiVnMB4fAMRTPwxF/Mw82dowM3016D44yR8gLjAKiMRAoGBAKp2\nKGUCDmm4+DarW0uP9jnmYxgp8YuYv7peyGL9Pm3us4ICqFOhTUnqfNEgbEph8IZO\nUeKE1cVZiRztM50NJWsgIlfFRvrh22x/uvEH4SowZez3rbrIFfC7vscwUU4G8MQu\nh5LT1s+WVw1p4CtMN2ClV/vI9Wu0LM3eQa4Spm+BAoGBAM/dTVQyKIO4s0ZYZzYi\nFCL4RRoQ6r5O33JX3q3BriMwnR4p1L7FkKV5jGHaNAln8a05cPnSWiXfjgYMAcpm\nU//0ey1m96Tju1rxbqQsrbOCQE4cxCt454UZmIgfOSIA/A0PWGURlUJHMUOxf0w5\nI9o+AOTs/zY2F4LL18zk4hAz\n-----END PRIVATE KEY-----\n",
+  "client_email": "ip-260@bold-momentum-447217-i9.iam.gserviceaccount.com",
+  "client_id": "110290022049246618994",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ip-260%40bold-momentum-447217-i9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
+`;   // Dán nội dung JSON hoặc API Key
 const DEFAULT_DEVICE    = "Android";
 // ══════════════════════════════════════════════════════════════════════════════
 
