@@ -372,9 +372,7 @@ async function getAccessToken() {
   const sigInput   = `${headerB64}.${payloadB64}`;
 
   // Import RSA private key
-  const pem     = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|
-|
-/g,'');
+  const pem = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n/g, '');
   const derBin  = atob(pem);
   const derArr  = new Uint8Array(derBin.length);
   for (let i=0;i<derBin.length;i++) derArr[i]=derBin.charCodeAt(i);
