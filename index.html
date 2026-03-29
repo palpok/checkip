@@ -24,64 +24,57 @@ nav{display:flex;background:var(--bg2);border-bottom:1px solid #222;
 nav button{flex:1;background:none;border:none;color:var(--muted);padding:12px 4px;
            font-size:13px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
 nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
-.page{display:none;padding:16px;}
-.page.active{display:block;}
-.card{background:var(--bg2);border-radius:var(--r);padding:16px;margin-bottom:12px;
-      border:1px solid #2a2a2a;}
-.card-title{font-size:11px;text-transform:uppercase;letter-spacing:.8px;
-            color:var(--muted);margin-bottom:10px;}
-.ip-big{font-size:28px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin:6px 0;}
-.sbadge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;
-        border-radius:20px;font-size:13px;font-weight:600;margin-top:8px;}
-.ok  {background:#00331a;color:var(--green);border:1px solid var(--green);}
-.dup {background:#330008;color:var(--red);  border:1px solid var(--red);}
-.warn{background:#332200;color:var(--warn); border:1px solid var(--warn);}
-.load{background:#003040;color:var(--cyan); border:1px solid var(--cyan2);}
+.page{display:none;padding:16px;} .page.active{display:block;}
+.card{background:var(--bg2);border-radius:var(--r);padding:16px;margin-bottom:12px;border:1px solid #2a2a2a;}
+.ctit{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:10px;}
+.ipbig{font-size:28px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin:6px 0;}
+.sb{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;
+    font-size:13px;font-weight:600;margin-top:8px;}
+.ok {background:#00331a;color:var(--green);border:1px solid var(--green);}
+.dup{background:#330008;color:var(--red);  border:1px solid var(--red);}
+.wn {background:#332200;color:var(--warn); border:1px solid var(--warn);}
+.ld {background:#003040;color:var(--cyan); border:1px solid var(--cyan2);}
 .btn{width:100%;padding:13px;border-radius:var(--r);border:none;font-size:14px;
      font-weight:600;cursor:pointer;margin-bottom:8px;transition:opacity .15s;}
-.btn:active{opacity:.7;}
-.btn-p{background:var(--cyan2);color:#000;}
-.btn-o{background:transparent;color:var(--cyan);border:1px solid var(--cyan2);}
-.btn-sm{padding:8px 14px;width:auto;font-size:13px;}
-.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn:active{opacity:.7;} .btn:disabled{opacity:.35;cursor:not-allowed;}
+.bp{background:var(--cyan2);color:#000;} .bo{background:transparent;color:var(--cyan);border:1px solid var(--cyan2);}
+.bsm{padding:8px 14px;width:auto;font-size:13px;}
 .ig{margin-bottom:12px;}
 .ig label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
-.ig input,.ig textarea{width:100%;background:var(--bg3);border:1px solid #333;
-  border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;}
-.ig input:focus,.ig textarea:focus{border-color:var(--cyan2);}
-.ig textarea{resize:vertical;min-height:90px;font-family:monospace;font-size:12px;}
-.hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
-.iprow{display:flex;align-items:center;justify-content:space-between;
-       padding:10px 0;border-bottom:1px solid #222;font-size:13px;}
-.iprow:last-child{border-bottom:none;}
-.iprow .sub{color:var(--muted);font-size:12px;margin-top:2px;}
+.ig input{width:100%;background:var(--bg3);border:1px solid #333;border-radius:8px;
+          padding:10px 12px;color:var(--text);font-size:14px;outline:none;}
+.ig input:focus{border-color:var(--cyan2);}
+.ht{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.6;}
+.irow{display:flex;align-items:center;justify-content:space-between;
+      padding:10px 0;border-bottom:1px solid #222;font-size:13px;}
+.irow:last-child{border-bottom:none;}
+.sub{color:var(--muted);font-size:12px;margin-top:2px;}
 .idup{color:var(--red);font-size:11px;font-weight:600;}
-.iok {color:var(--green);font-size:11px;}
-.pc{background:var(--bg3);border-radius:10px;padding:12px 14px;
-    margin-bottom:8px;border-left:3px solid var(--cyan2);}
-.pc .pn{font-size:14px;font-weight:600;color:var(--cyan);}
-.pc .pi{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
-.pc .ps{font-size:11px;font-weight:600;margin-top:6px;}
+.iok{color:var(--green);font-size:11px;}
+.pc{background:var(--bg3);border-radius:10px;padding:12px 14px;margin-bottom:8px;border-left:3px solid var(--cyan2);}
+.pn{font-size:14px;font-weight:600;color:var(--cyan);}
+.pi{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
+.ps{font-size:11px;font-weight:600;margin-top:6px;}
 .cancelled{color:var(--red);} .delivered{color:var(--green);} .pending{color:var(--warn);}
 .sw{position:relative;margin-bottom:12px;}
 .sw input{width:100%;background:var(--bg3);border:1px solid #333;border-radius:8px;
           padding:10px 12px 10px 36px;color:var(--text);font-size:14px;outline:none;}
 .sw input:focus{border-color:var(--cyan2);}
-.si{position:absolute;left:10px;top:50%;transform:translateY(-50%);
-    color:var(--muted);font-size:16px;pointer-events:none;}
-#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
-       background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;
-       opacity:0;transition:opacity .3s;z-index:100;white-space:nowrap;pointer-events:none;}
+.si{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);
+    font-size:16px;pointer-events:none;}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#333;
+       color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;
+       transition:opacity .3s;z-index:100;white-space:nowrap;pointer-events:none;}
 #toast.show{opacity:1;}
-.div{height:1px;background:#222;margin:16px 0;}
-.rbtns{display:flex;gap:8px;margin-bottom:8px;}
-.rbtns .btn{margin-bottom:0;}
-.csts{font-size:12px;padding:6px 10px;border-radius:6px;margin-bottom:12px;}
-.csok {background:#003010;color:var(--green);border:1px solid #005020;}
+.dvd{height:1px;background:#222;margin:16px 0;}
+.rb{display:flex;gap:8px;margin-bottom:8px;} .rb .btn{margin-bottom:0;}
+.csi{font-size:12px;padding:6px 10px;border-radius:6px;margin-bottom:12px;}
+.csok{background:#003010;color:var(--green);border:1px solid #005020;}
 .cswn{background:#2a1800;color:var(--warn);border:1px solid #553000;}
 </style>
 </head>
 <body>
+
 <header>
   <h1>🌐 IP Checker</h1>
   <p id="hst">Đang khởi động...</p>
@@ -93,62 +86,65 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
   <button onclick="go('settings')">⚙️ Cài đặt</button>
 </nav>
 
+<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="card">
-    <div class="card-title">IP hiện tại</div>
-    <div class="ip-big" id="myip">...</div>
+    <div class="ctit">IP hiện tại</div>
+    <div class="ipbig" id="myip">...</div>
     <div id="ipst"></div>
   </div>
-  <button class="btn btn-p" onclick="checkAndPush()" id="bc">🔍 Kiểm tra &amp; Ghi lên Sheet</button>
-  <button class="btn btn-o" onclick="checkOnly()" id="bco">👁 Chỉ kiểm tra (không ghi)</button>
+  <button class="btn bp" id="bc" onclick="checkAndPush()">🔍 Kiểm tra &amp; Ghi lên Sheet</button>
+  <button class="btn bo" id="bco" onclick="checkOnly()">👁 Chỉ kiểm tra (không ghi)</button>
   <div class="card" id="dupcard" style="display:none">
-    <div class="card-title">⚠️ IP đã xuất hiện trước đây trong 24h</div>
-    <div id="dupmsg"></div>
+    <div class="ctit">⚠️ IP đã xuất hiện trong 24h</div>
+    <div id="dupmsg" style="font-size:13px;color:var(--red)"></div>
   </div>
 </div>
 
+<!-- IP LIST -->
 <div id="page-history" class="page">
   <div class="sw"><span class="si">🔍</span>
-    <input type="text" id="srip" placeholder="Tìm IP..." oninput="filterHist()">
+    <input id="srip" type="text" placeholder="Tìm IP..." oninput="filterH()">
   </div>
-  <div id="histlist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải. Về Home → Kiểm tra IP.</div></div>
-  <button class="btn btn-o" style="margin-top:8px" onclick="refreshHist()">🔄 Làm mới từ Sheet</button>
+  <div id="hlist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải. Về Home → Kiểm tra IP.</div></div>
+  <button class="btn bo" style="margin-top:8px" onclick="refreshH()">🔄 Làm mới từ Sheet</button>
 </div>
 
+<!-- PROFILES -->
 <div id="page-profiles" class="page">
   <div class="sw"><span class="si">🔍</span>
-    <input type="text" id="srpr" placeholder="Tìm tên, shop, tracking..." oninput="filterProf()">
+    <input id="srpr" type="text" placeholder="Tìm tên, shop, tracking..." oninput="filterP()">
   </div>
-  <div id="proflist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải.</div></div>
-  <button class="btn btn-o" style="margin-top:8px" onclick="loadProfiles()">🔄 Tải Profiles từ Sheet</button>
+  <div id="plist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải.</div></div>
+  <button class="btn bo" style="margin-top:8px" onclick="loadProfs()">🔄 Tải Profiles từ Sheet</button>
 </div>
 
+<!-- SETTINGS -->
 <div id="page-settings" class="page">
   <div class="card">
-    <div class="card-title">Google Sheets</div>
-    <div id="cfgind" class="csts cswn">⚠️ Chưa cấu hình</div>
+    <div class="ctit">Apps Script URL</div>
+    <div id="cfgi" class="csi cswn">⚠️ Chưa cấu hình</div>
     <div class="ig">
-      <label>Spreadsheet ID</label>
-      <input type="text" id="csid" placeholder="Lấy từ URL của Google Sheet">
-    </div>
-    <div class="ig">
-      <label>Service Account JSON <span style="color:var(--green)">(đọc+ghi)</span> hoặc API Key <span style="color:var(--warn)">(chỉ đọc)</span></label>
-      <textarea id="ckey" placeholder="Dán nội dung service_account.json&#10;hoặc API Key (AIza...)"></textarea>
-      <div class="hint">Service Account cho phép ghi IP. API Key chỉ đọc.</div>
+      <label>Web App URL (từ Google Apps Script)</label>
+      <input id="curl" type="url" placeholder="https://script.google.com/macros/s/.../exec">
+      <div class="ht">
+        Vào Google Sheet → Extensions → Apps Script → Deploy → Web App<br>
+        Execute as: <b>Me</b> | Who has access: <b>Anyone</b>
+      </div>
     </div>
     <div class="ig">
       <label>Tên thiết bị (không bắt buộc)</label>
-      <input type="text" id="cdev" placeholder="VD: Samsung_S23">
+      <input id="cdev" type="text" placeholder="VD: Samsung_S23">
     </div>
-    <div class="rbtns">
-      <button class="btn btn-p btn-sm" onclick="saveCfg()">💾 Lưu</button>
-      <button class="btn btn-o btn-sm" onclick="testConn()">🔌 Test</button>
-      <button class="btn btn-o btn-sm" onclick="clrCache()" style="color:var(--red);border-color:var(--red)">🗑 Xóa</button>
+    <div class="rb">
+      <button class="btn bp bsm" onclick="saveCfg()">💾 Lưu</button>
+      <button class="btn bo bsm" onclick="testConn()">🔌 Test</button>
+      <button class="btn bo bsm" onclick="clrCache()" style="color:var(--red);border-color:var(--red)">🗑 Xóa</button>
     </div>
-    <div class="div"></div>
-    <div class="hint" style="line-height:1.9">
+    <div class="dvd"></div>
+    <div class="ht" style="line-height:1.9">
       💡 Mở bằng Chrome → ⋮ → <b>Thêm vào màn hình chính</b> để dùng như app.<br>
-      💡 Lưu cài đặt xong thì về Home → Kiểm tra IP.
+      💡 Không cần JWT hay Service Account — Apps Script xử lý auth thay bạn.
     </div>
   </div>
 </div>
@@ -157,200 +153,163 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
-// ★ CẤU HÌNH MẶC ĐỊNH – điền vào đây để không cần cài đặt lại mỗi lần
+// ★ CẤU HÌNH MẶC ĐỊNH – paste Apps Script URL vào đây
 // ══════════════════════════════════════════════════════════════════════════════
-const DEF_SID = "1HGOPZy3PY2XM9F0PH1S8uPtePPuBlHfNplI_JbU_B4o";   // Spreadsheet ID
-const DEF_KEY = `{
-  "type": "service_account",
-  "project_id": "bold-momentum-447217-i9",
-  "private_key_id": "3a990f4358f4daa73e5adb1433cecddf03b1e0e2",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCHCOfCJNptPON\n2w+asJRaMYDnAfzJzv8nwNMJQldwsOPBTMGMhYw/g67wWZd86Fu8GOWx0wt+BFKi\nYDPM8nMmd8e/9nBlsAnaEeyVef3wB5omsAm889DFpfwctK59RtrgLAfIsCOp3wcN\n5n/J+ZlJr4h0W0wv6ajv/OmLchxiCI+Exict0j+qq8tIrO+qr+WH333gyC70ZxC4\nuFhqfVlZuFT3yIjKj+STSUezg4LNblG2a1TSgTG/A3Ekz+H9MlwFtbhqHgMxpS3i\nesQfSZjeXbTKIyxOXPdWmCxKAs5yOMyh+vs5i/dmIGkP14U3XSh/tb76UwxIWNQ2\nx5W7oOE3AgMBAAECggEAWLT/WmhS5dX6D/Pyd6EGywkgfXGdEqT0Wjh2uR6GU0uj\nae0n7o4Bf+0v/0sSPdT6R0WhgtiNwfM7yFTql1idYxEOSh3XU8FVX0Edu1nawNzY\nh6GfcaiC2jB2vK+dpkbBM/0rOX21bqYr1SBneegFM3VyiKpIcQT5XWNZX46whePS\n1gv5Q/rUKnSsSjyEDk7sTwLXqLnZIeqdWDzhHpiktHWsOsSajcSEnv31yCOFjMnf\nrUnMritAslrBYwuEh9e1cdYVaH5om/sjbKdGdw+RNARaCgZeK0BItte45RReKy8p\nOl1NdtROn8GeGQoT7Eu3VbUi//Vy3tSzskYj3BWwMQKBgQD2woOQUxkrEszT05wd\n7zF62866E9eL4rZBAQlrwl5NmglMp75OS70eePPcch0dYinVJ3OneOC8Vt9HVtC8\nIXCpVOjBcz0nHaCVCFlUY04fotASeM9zgNfhzwr2mkHYroTy545ELCZ4xE/fi5T5\nLoQ2UArU/fQWc8bk9L/9y+zCKwKBgQDJYOnR6yaOfOM76mZlJ2ydh+Hd+heu/Idu\nKk3ul8wj7dIA1psdorbJJmXbnwB+nVgbmhV1CfbDwdyAqri8jsZsIC38ds2RITNS\nvyGhzZtuQtbwB3AzZTxLD9j6SoXEEpo4qWSy6gdOFM/JRqXCU1nqQkwdhLN0XceK\nXv2Bl07zJQKBgAFd5HKpMyt86CuIMYYs6/49N3DqaTg6Ij5L7ixtoC4X21NUXoZ6\nfuqrStZ+v1CJWaf3lvlnfv8sEAKKJY/VM5WMhdmEdONBk8EfkbcY8bbVJQflKWj/\nXrK+fdYN1q2Hke7yf2Q7Rl9G3xZi5IlYy5ytZtH1MiPpskFUZbfXKFGPAoGAGdH+\nSPcgq3Zh4GXOmTuz1oL8t+yAKuSgLMTp1yTJfPXaTlc17lfVnfb5am55rsJX8LoR\n9D7B0BnEPw8kvrCDyotZuhw1gV1DamGtW0S0oC+bxYz+muhpEarHhFgXzKsh8Q/v\nJG2TYDSU69bOHBt51OqJPeOs6se3dQt2763J5q0CgYEA0QJU4SjOf4dCdqCG+XtJ\nS9SWmwYGd63uFs5hsh2LFJhIIB68jTTk2QkaUIHDjMNTw77nOE6GGIVFJRe21Vx4\njUEVt5wBoqDDNJq9T/dGs8HMJ62dlTGaeWrkLRZ9mgo4+6GkpRr91Y6DGXLBMQOy\nwSTSwGw1H+k2OIEpim9p3K8=\n-----END PRIVATE KEY-----\n",
-  "client_email": "v-691-565@bold-momentum-447217-i9.iam.gserviceaccount.com",
-  "client_id": "104408507449755926172",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/v-691-565%40bold-momentum-447217-i9.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
-`;   // Service Account JSON hoặc API Key
+const DEF_URL = "";   // VD: "https://script.google.com/macros/s/AKfy.../exec"
 const DEF_DEV = "Android";
 // ══════════════════════════════════════════════════════════════════════════════
 
-let cfg = {};
-let ipHist = [];      // [{ip, time}]  giống ip_history.json
-let profs  = [];
-let myip   = null;
+var cfg    = {};
+var ipHist = [];   // [{ip, time}]
+var profs  = [];
+var myip   = null;
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-window.onload = async () => {
+window.onload = function() {
   loadCfg();
-  updCfgUI();
-  updHdr();
-  await getMyIp();
-  if (isOk()) await checkOnly();
+  updUI();
+  getMyIp().then(function() {
+    if (isOk()) checkOnly();
+  });
 };
 
+// ── Config ────────────────────────────────────────────────────────────────────
 function loadCfg() {
-  let sv = {};
-  try { sv = JSON.parse(localStorage.getItem('ipc_cfg') || '{}'); } catch(e) {}
+  var sv = {};
+  try { sv = JSON.parse(localStorage.getItem('ipc2_cfg') || '{}'); } catch(e) {}
   cfg = {
-    sid: sv.sid || DEF_SID,
-    key: sv.key || DEF_KEY,
+    url: sv.url || DEF_URL,
     dev: sv.dev || DEF_DEV,
   };
-  document.getElementById('csid').value = sv.sid || '';
-  document.getElementById('ckey').value = sv.key || '';
+  document.getElementById('curl').value = sv.url || '';
   document.getElementById('cdev').value = sv.dev || '';
 }
 
 function saveCfg() {
-  const sv = {};
-  const sid = document.getElementById('csid').value.trim();
-  const key = document.getElementById('ckey').value.trim();
-  const dev = document.getElementById('cdev').value.trim();
-  if (sid) sv.sid = sid;
-  if (key) sv.key = key;
+  var sv = {};
+  var url = document.getElementById('curl').value.trim();
+  var dev = document.getElementById('cdev').value.trim();
+  if (url) sv.url = url;
   if (dev) sv.dev = dev;
-  localStorage.setItem('ipc_cfg', JSON.stringify(sv));
-  sessionStorage.removeItem('_tk'); sessionStorage.removeItem('_te');
-  loadCfg(); updCfgUI(); updHdr();
+  localStorage.setItem('ipc2_cfg', JSON.stringify(sv));
+  loadCfg(); updUI();
   toast('✅ Đã lưu');
 }
 
 function clrCache() {
   if (!confirm('Xóa cache & cài đặt đã lưu?')) return;
-  localStorage.removeItem('ipc_cfg');
-  localStorage.removeItem('ipc_hist');
-  localStorage.removeItem('ipc_profs');
-  sessionStorage.clear();
+  localStorage.clear(); sessionStorage.clear();
   ipHist = []; profs = []; myip = null;
-  loadCfg(); updCfgUI();
-  location.reload();
+  loadCfg(); updUI(); location.reload();
 }
 
-function isOk()  { return !!(cfg.sid && cfg.key); }
-function isSA()  { try { JSON.parse(cfg.key); return true; } catch(e) { return false; } }
+function isOk() { return !!cfg.url; }
 
-function updCfgUI() {
-  const el = document.getElementById('cfgind');
-  if (isOk()) { el.className='csts csok'; el.textContent='✅ Đã cấu hình'; }
-  else         { el.className='csts cswn'; el.textContent='⚠️ Chưa cấu hình – điền bên dưới'; }
-}
-function updHdr() {
-  document.getElementById('hst').textContent =
-    isOk() ? ('Sheet: ' + cfg.sid.slice(0,24) + '...') : 'Chưa cấu hình – vào ⚙️';
+function updUI() {
+  var el = document.getElementById('cfgi');
+  if (isOk()) { el.className='csi csok'; el.textContent='✅ Đã cấu hình'; }
+  else         { el.className='csi cswn'; el.textContent='⚠️ Chưa nhập Apps Script URL'; }
+  document.getElementById('hst').textContent = isOk() ? 'Đã kết nối Apps Script' : 'Chưa cấu hình – vào ⚙️';
 }
 
-// ── Sheets API ────────────────────────────────────────────────────────────────
-async function shGet(range) {
-  if (!isOk()) throw new Error('Chưa cấu hình');
-  if (!isSA()) {
-    const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}?key=${cfg.key}`);
-    if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
-    return (await r.json()).values || [];
-  }
-  const tk = await getTk();
-  const r  = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}`,
-    {headers:{Authorization:'Bearer '+tk}});
-  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
-  return (await r.json()).values || [];
-}
+// ── Apps Script API ───────────────────────────────────────────────────────────
+// Gọi Web App qua JSONP để tránh CORS (Apps Script không cần auth)
+function callAS(params) {
+  return new Promise(function(resolve, reject) {
+    var cbName = '_cb' + Date.now();
+    var url = cfg.url + '?' + Object.keys(params).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }).join('&') + '&callback=' + cbName;
 
-async function shAppend(range, values) {
-  if (!isSA()) throw new Error('Cần Service Account JSON để ghi');
-  const tk = await getTk();
-  const r  = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
-    {method:'POST', headers:{Authorization:'Bearer '+tk,'Content-Type':'application/json'},
-     body:JSON.stringify({values})});
-  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
-}
+    var done = false;
+    window[cbName] = function(data) {
+      done = true;
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      if (data && data.ok) resolve(data);
+      else reject(new Error((data && data.error) || 'Apps Script error'));
+    };
 
-// ── JWT ───────────────────────────────────────────────────────────────────────
-function b64u(str) {
-  return btoa(unescape(encodeURIComponent(str))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
-}
-function b64ub(bytes) {
-  let s=''; for(let i=0;i<bytes.length;i++) s+=String.fromCharCode(bytes[i]);
-  return btoa(s).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
-}
-
-async function getTk() {
-  const cached = sessionStorage.getItem('_tk');
-  const exp    = parseInt(sessionStorage.getItem('_te')||'0');
-  if (cached && Date.now() < exp) return cached;
-
-  const sa  = JSON.parse(cfg.key);
-  const now = Math.floor(Date.now()/1000);
-  const hdr = {alg:'RS256',typ:'JWT'};
-  const pay = {iss:sa.client_email,
-               scope:'https://www.googleapis.com/auth/spreadsheets',
-               aud:'https://oauth2.googleapis.com/token',
-               iat:now, exp:now+3600};
-  const si  = b64u(JSON.stringify(hdr)) + '.' + b64u(JSON.stringify(pay));
-
-  const pem = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n|\r/g,'');
-  const der = atob(pem);
-  const buf = new Uint8Array(der.length);
-  for(let i=0;i<der.length;i++) buf[i]=der.charCodeAt(i);
-
-  const key = await crypto.subtle.importKey('pkcs8', buf.buffer,
-    {name:'RSASSA-PKCS1-v1_5', hash:{name:'SHA-256'}}, false, ['sign']);
-  const sig = await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'}, key,
-    new TextEncoder().encode(si));
-  const jwt = si + '.' + b64ub(new Uint8Array(sig));
-
-  const resp = await fetch('https://oauth2.googleapis.com/token', {
-    method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion='+jwt,
+    var script = document.createElement('script');
+    script.src = url;
+    script.onerror = function() {
+      if (!done) { done=true; delete window[cbName]; reject(new Error('Network error')); }
+    };
+    setTimeout(function() {
+      if (!done) { done=true; delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        reject(new Error('Timeout'));
+      }
+    }, 15000);
+    document.head.appendChild(script);
   });
-  const data = await resp.json();
-  if (!data.access_token) throw new Error('Token error: '+JSON.stringify(data));
-  sessionStorage.setItem('_tk', data.access_token);
-  sessionStorage.setItem('_te', String((now+3500)*1000));
-  return data.access_token;
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-async function getMyIp() {
-  document.getElementById('myip').textContent='⏳';
-  try { myip=(await(await fetch('https://api.ipify.org?format=json')).json()).ip; }
-  catch(e){ try{ myip=(await(await fetch('https://api.myip.com')).json()).ip; }catch(e2){ myip=null; } }
-  document.getElementById('myip').textContent = myip||'(Không lấy được)';
+// JSONP yêu cầu Apps Script trả callback – nhưng Apps Script mặc định không hỗ trợ JSONP
+// Dùng fetch với no-cors không đọc được response
+// → Dùng fetch thường (Apps Script đã set CORS header cho Anyone access)
+function callASFetch(params) {
+  if (!isOk()) return Promise.reject(new Error('Chưa cấu hình URL'));
+  var qs = Object.keys(params).map(function(k) {
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+  }).join('&');
+  return fetch(cfg.url + '?' + qs)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data && data.ok) return data;
+      throw new Error((data && data.error) || 'Apps Script error');
+    });
 }
 
-async function loadIpHist() {
-  const rows = await shGet('IP_History!A:B');
-  ipHist = [];
-  for (const r of rows.slice(1)) {
-    if (r[0]) ipHist.push({ip:r[0], time:r[1]||''});
-  }
-  localStorage.setItem('ipc_hist', JSON.stringify(ipHist));
+// ── IP ────────────────────────────────────────────────────────────────────────
+function getMyIp() {
+  document.getElementById('myip').textContent = '⏳';
+  return fetch('https://api.ipify.org?format=json')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { myip = d.ip; })
+    .catch(function() {
+      return fetch('https://api.myip.com')
+        .then(function(r) { return r.json(); })
+        .then(function(d) { myip = d.ip; })
+        .catch(function() { myip = null; });
+    })
+    .then(function() {
+      document.getElementById('myip').textContent = myip || '(Không lấy được)';
+    });
 }
 
-// Kiểm tra ip có xuất hiện trong 24h không (giống logic PC)
+function loadIpHist() {
+  return callASFetch({action: 'read_ip'}).then(function(d) {
+    ipHist = d.records || [];
+    localStorage.setItem('ipc2_hist', JSON.stringify(ipHist));
+  });
+}
+
+// Giống logic PC: ip xuất hiện trong 24h → trùng
 function isDup(ip) {
-  const now = Date.now(), h24 = 24*60*60*1000;
-  return ipHist.some(function(r) {
-    if (r.ip !== ip) return false;
-    try { return (now - new Date(r.time.replace(' ','T')).getTime()) <= h24; }
-    catch(e) { return false; }
-  });
+  var now = Date.now(), h24 = 24*60*60*1000;
+  for (var i = 0; i < ipHist.length; i++) {
+    var r = ipHist[i];
+    if (r.ip !== ip) continue;
+    try {
+      var t = new Date(r.time.replace(' ', 'T')).getTime();
+      if ((now - t) <= h24) return true;
+    } catch(e) {}
+  }
+  return false;
 }
 
-// Format datetime YYYY-MM-DD HH:MM:SS
 function nowStr() {
-  const d=new Date(), pad=n=>String(n).padStart(2,'0');
-  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+
-         pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  var d = new Date(), z = function(n) { return String(n).padStart(2,'0'); };
+  return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+' '+
+         z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds());
 }
 
-async function appendMyIp() {
-  const t = nowStr();
-  await shAppend('IP_History!A:B', [[myip, t]]);
-  ipHist.push({ip:myip, time:t});
-  localStorage.setItem('ipc_hist', JSON.stringify(ipHist));
+function appendMyIp() {
+  var t = nowStr();
+  return callASFetch({action: 'write_ip', ip: myip, time: t}).then(function() {
+    ipHist.push({ip: myip, time: t});
+    localStorage.setItem('ipc2_hist', JSON.stringify(ipHist));
+  });
 }
 
 // ── Actions ───────────────────────────────────────────────────────────────────
@@ -359,127 +318,116 @@ function setBtns(d) {
   document.getElementById('bco').disabled = d;
 }
 
-function showSt(type, msg) {
-  document.getElementById('ipst').innerHTML =
-    '<span class="sbadge '+type+'">'+msg+'</span>';
-  document.getElementById('dupcard').style.display='none';
+function showSt(cls, msg) {
+  document.getElementById('ipst').innerHTML = '<span class="sb '+cls+'">'+msg+'</span>';
+  document.getElementById('dupcard').style.display = 'none';
 }
 
 function showRes(dup) {
   if (!dup) {
-    showSt('ok','✅ IP chưa xuất hiện trong 24h');
+    showSt('ok', '✅ IP chưa xuất hiện trong 24h');
   } else {
     document.getElementById('ipst').innerHTML =
-      '<span class="sbadge dup">⚠️ IP đã xuất hiện trong 24h!</span>';
+      '<span class="sb dup">⚠️ IP đã xuất hiện trong 24h!</span>';
     document.getElementById('dupmsg').textContent =
-      'IP này đã được ghi nhận trước đây trong vòng 24 giờ.';
-    document.getElementById('dupcard').style.display='block';
+      'IP ' + myip + ' đã được ghi nhận trước đây trong vòng 24 giờ.';
+    document.getElementById('dupcard').style.display = 'block';
   }
 }
 
-async function checkOnly() {
-  if (!myip) await getMyIp();
-  if (!myip) { showSt('warn','⚠️ Không lấy được IP'); return; }
-  if (!isOk()) { showSt('warn','⚠️ Chưa cấu hình Sheet'); return; }
-  showSt('load','⏳ Đang kiểm tra...'); setBtns(true);
-  try {
-    await loadIpHist();
-    showRes(isDup(myip));
-    renderHist();
-  } catch(e) { showSt('warn','⚠️ '+e.message); }
-  finally { setBtns(false); }
+function checkOnly() {
+  if (!myip) { showSt('wn','⚠️ Không lấy được IP'); return; }
+  if (!isOk()) { showSt('wn','⚠️ Chưa cấu hình URL'); return; }
+  showSt('ld','⏳ Đang kiểm tra...'); setBtns(true);
+  loadIpHist()
+    .then(function() { showRes(isDup(myip)); renderH(); })
+    .catch(function(e) { showSt('wn','⚠️ '+e.message); })
+    .finally(function() { setBtns(false); });
 }
 
-async function checkAndPush() {
-  if (!myip) await getMyIp();
-  if (!myip) { showSt('warn','⚠️ Không lấy được IP'); return; }
-  if (!isOk()) { showSt('warn','⚠️ Chưa cấu hình Sheet'); return; }
-  if (!isSA()) { toast('⚠️ Cần Service Account JSON để ghi'); await checkOnly(); return; }
-  showSt('load','⏳ Kiểm tra & ghi lên Sheet...'); setBtns(true);
-  try {
-    await loadIpHist();
-    const dup = isDup(myip);
-    await appendMyIp();
-    showRes(dup);
-    renderHist();
-    toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
-  } catch(e) { showSt('warn','⚠️ '+e.message); }
-  finally { setBtns(false); }
+function checkAndPush() {
+  if (!myip) { showSt('wn','⚠️ Không lấy được IP'); return; }
+  if (!isOk()) { showSt('wn','⚠️ Chưa cấu hình URL'); return; }
+  showSt('ld','⏳ Kiểm tra & ghi lên Sheet...'); setBtns(true);
+  loadIpHist()
+    .then(function() {
+      var dup = isDup(myip);
+      return appendMyIp().then(function() { return dup; });
+    })
+    .then(function(dup) {
+      showRes(dup); renderH();
+      toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
+    })
+    .catch(function(e) { showSt('wn','⚠️ '+e.message); })
+    .finally(function() { setBtns(false); });
 }
 
 // ── Render IP list ────────────────────────────────────────────────────────────
-function renderHist(filter) {
-  const el  = document.getElementById('histlist');
-  const txt = (filter||'').toLowerCase();
-  const now = Date.now(), h24 = 24*60*60*1000;
-  const cnt = {};
-  for (const r of ipHist) cnt[r.ip]=(cnt[r.ip]||0)+1;
-  let list = ipHist.slice();
-  if (txt) list = list.filter(function(r){ return r.ip.includes(txt); });
+function renderH(filter) {
+  var el  = document.getElementById('hlist');
+  var txt = (filter || '').toLowerCase();
+  var now = Date.now(), h24 = 24*60*60*1000;
+  var cnt = {};
+  for (var i=0; i<ipHist.length; i++) cnt[ipHist[i].ip] = (cnt[ipHist[i].ip]||0)+1;
+  var list = ipHist.slice();
+  if (txt) list = list.filter(function(r) { return r.ip.indexOf(txt) >= 0; });
   if (!list.length) {
     el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không có dữ liệu</div>';
     return;
   }
-  list.sort(function(a,b){ return b.time > a.time ? 1 : -1; });
-  el.innerHTML = list.map(function(r) {
-    const dup = cnt[r.ip] > 1;
+  list.sort(function(a,b) { return a.time < b.time ? 1 : -1; });
+  var html = '';
+  for (var i=0; i<list.length; i++) {
+    var r   = list[i];
+    var dup = cnt[r.ip] > 1;
     var in24 = false;
     try { in24 = (now - new Date(r.time.replace(' ','T')).getTime()) <= h24; } catch(e){}
-    const color = dup ? 'var(--red)' : (in24 ? 'var(--warn)' : 'var(--text)');
-    return '<div class="iprow">' +
+    var color = dup ? 'var(--red)' : (in24 ? 'var(--warn)' : 'var(--text)');
+    html += '<div class="irow">' +
       '<div><div style="font-size:14px;color:'+color+'">'+r.ip+'</div>' +
       '<div class="sub">'+r.time+'</div></div>' +
       '<div class="'+(dup?'idup':'iok')+'">'+(dup?'⚠️ TRÙNG':'✅')+'</div>' +
       '</div>';
-  }).join('');
+  }
+  el.innerHTML = html;
 }
 
-function filterHist() { renderHist(document.getElementById('srip').value); }
+function filterH() { renderH(document.getElementById('srip').value); }
 
-async function refreshHist() {
+function refreshH() {
   if (!isOk()) { toast('Chưa cấu hình'); return; }
-  try { await loadIpHist(); renderHist(document.getElementById('srip').value); toast('✅ Đã làm mới'); }
-  catch(e) { toast('❌ '+e.message); }
+  toast('⏳ Đang tải...');
+  loadIpHist()
+    .then(function() { renderH(document.getElementById('srip').value); toast('✅ Đã làm mới'); })
+    .catch(function(e) { toast('❌ '+e.message); });
 }
 
 // ── Profiles ──────────────────────────────────────────────────────────────────
-async function loadProfiles() {
+function loadProfs() {
   if (!isOk()) { toast('Chưa cấu hình'); return; }
-  const el = document.getElementById('proflist');
+  var el = document.getElementById('plist');
   el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">⏳ Đang tải...</div>';
-  try {
-    const rows = await shGet('Profiles!A:AH');
-    if (rows.length < 2) { el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">Sheet trống</div>'; return; }
-    const hdr = rows[0];
-    const idx = function(n){ return hdr.indexOf(n); };
-    profs = rows.slice(1).filter(function(r){ return r[0]; }).map(function(r) {
-      return {
-        name:           r[idx('name')]||'',
-        shop_name:      r[idx('shop_name')]||'',
-        product_name:   r[idx('product_name')]||'',
-        tracking_code:  r[idx('tracking_code')]||'',
-        phone_number:   r[idx('phone_number')]||'',
-        delivery_status:r[idx('delivery_status')]||'',
-        price:          r[idx('price')]||'',
-      };
+  callASFetch({action:'read_profiles'})
+    .then(function(d) {
+      profs = d.profiles || [];
+      localStorage.setItem('ipc2_profs', JSON.stringify(profs));
+      renderP();
+      toast('✅ '+profs.length+' profiles');
+    })
+    .catch(function(e) {
+      el.innerHTML='<div style="color:var(--red);padding:20px">❌ '+e.message+'</div>';
     });
-    localStorage.setItem('ipc_profs', JSON.stringify(profs));
-    renderProf();
-    toast('✅ ' + profs.length + ' profiles');
-  } catch(e) {
-    el.innerHTML='<div style="color:var(--red);padding:20px">❌ '+e.message+'</div>';
-  }
 }
 
-function renderProf(filter) {
-  const el  = document.getElementById('proflist');
-  const txt = (filter||'').toLowerCase();
-  var list  = profs;
+function renderP(filter) {
+  var el  = document.getElementById('plist');
+  var txt = (filter||'').toLowerCase();
+  var list = profs;
   if (txt) list = list.filter(function(p) {
-    return p.name.toLowerCase().includes(txt) ||
-           (p.shop_name||'').toLowerCase().includes(txt) ||
-           (p.tracking_code||'').toLowerCase().includes(txt) ||
-           (p.phone_number||'').includes(txt);
+    return p.name.toLowerCase().indexOf(txt)>=0 ||
+           (p.shop_name||'').toLowerCase().indexOf(txt)>=0 ||
+           (p.tracking_code||'').indexOf(txt)>=0 ||
+           (p.phone_number||'').indexOf(txt)>=0;
   });
   if (!list.length) {
     el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không tìm thấy</div>';
@@ -487,55 +435,56 @@ function renderProf(filter) {
   }
   function sc(s) {
     s=(s||'').toLowerCase();
-    if(s.includes('huỷ')||s.includes('cancel')) return 'cancelled';
-    if(s.includes('giao thành công')||s.includes('delivered')) return 'delivered';
+    if(s.indexOf('huỷ')>=0||s.indexOf('cancel')>=0) return 'cancelled';
+    if(s.indexOf('giao thành công')>=0||s.indexOf('delivered')>=0) return 'delivered';
     return 'pending';
   }
-  el.innerHTML = list.map(function(p) {
-    return '<div class="pc">' +
-      '<div class="pn">'+p.name+'</div>' +
+  var html='';
+  for(var i=0;i<list.length;i++){
+    var p=list[i];
+    html+='<div class="pc"><div class="pn">'+p.name+'</div>' +
       '<div class="pi">🏪 '+(p.shop_name||'—')+'<br>' +
       '📦 '+(p.product_name||'—').slice(0,60)+'<br>' +
       '🚚 '+(p.tracking_code||'—')+'<br>' +
       '📞 '+(p.phone_number||'—')+'<br>' +
       '💰 '+(p.price||'—')+'</div>' +
-      (p.delivery_status ? '<div class="ps '+sc(p.delivery_status)+'">📍 '+p.delivery_status+'</div>' : '') +
+      (p.delivery_status?'<div class="ps '+sc(p.delivery_status)+'">📍 '+p.delivery_status+'</div>':'')+
       '</div>';
-  }).join('');
+  }
+  el.innerHTML=html;
 }
 
-function filterProf() { renderProf(document.getElementById('srpr').value); }
+function filterP() { renderP(document.getElementById('srpr').value); }
 
 // ── Test ──────────────────────────────────────────────────────────────────────
-async function testConn() {
-  if (!isOk()) { toast('Chưa cấu hình'); return; }
+function testConn() {
+  if (!isOk()) { toast('Chưa nhập URL'); return; }
   toast('⏳ Đang test...');
-  try { await shGet('IP_History!A1'); toast('✅ Kết nối thành công!'); }
-  catch(e) { toast('❌ '+e.message); }
+  callASFetch({action:'read_ip'})
+    .then(function() { toast('✅ Kết nối thành công!'); })
+    .catch(function(e) { toast('❌ '+e.message); });
 }
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
-const PAGES = ['home','history','profiles','settings'];
+var PAGES = ['home','history','profiles','settings'];
 function go(id) {
-  PAGES.forEach(function(p) {
-    document.getElementById('page-'+p).classList.remove('active');
-  });
+  PAGES.forEach(function(p) { document.getElementById('page-'+p).classList.remove('active'); });
   document.querySelectorAll('nav button').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('nav button')[PAGES.indexOf(id)].classList.add('active');
   if (id==='history' && !ipHist.length) {
-    try { ipHist=JSON.parse(localStorage.getItem('ipc_hist')||'[]'); } catch(e){}
-    renderHist();
+    try{ipHist=JSON.parse(localStorage.getItem('ipc2_hist')||'[]');}catch(e){}
+    renderH();
   }
   if (id==='profiles' && !profs.length) {
-    try { profs=JSON.parse(localStorage.getItem('ipc_profs')||'[]'); } catch(e){}
-    if (profs.length) renderProf();
+    try{profs=JSON.parse(localStorage.getItem('ipc2_profs')||'[]');}catch(e){}
+    if(profs.length) renderP();
   }
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function toast(msg) {
-  const el=document.getElementById('toast');
+  var el=document.getElementById('toast');
   el.textContent=msg; el.classList.add('show');
   setTimeout(function(){ el.classList.remove('show'); }, 2500);
 }
