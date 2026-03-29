@@ -31,154 +31,124 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
 .card-title{font-size:11px;text-transform:uppercase;letter-spacing:.8px;
             color:var(--muted);margin-bottom:10px;}
 .ip-big{font-size:28px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin:6px 0;}
-.status-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;
-              border-radius:20px;font-size:13px;font-weight:600;margin-top:8px;}
-.badge-ok  {background:#00331a;color:var(--green);border:1px solid var(--green);}
-.badge-dup {background:#330008;color:var(--red);  border:1px solid var(--red);}
-.badge-warn{background:#332200;color:var(--warn); border:1px solid var(--warn);}
-.badge-load{background:#003040;color:var(--cyan); border:1px solid var(--cyan2);}
+.sbadge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;
+        border-radius:20px;font-size:13px;font-weight:600;margin-top:8px;}
+.ok  {background:#00331a;color:var(--green);border:1px solid var(--green);}
+.dup {background:#330008;color:var(--red);  border:1px solid var(--red);}
+.warn{background:#332200;color:var(--warn); border:1px solid var(--warn);}
+.load{background:#003040;color:var(--cyan); border:1px solid var(--cyan2);}
 .btn{width:100%;padding:13px;border-radius:var(--r);border:none;font-size:14px;
      font-weight:600;cursor:pointer;margin-bottom:8px;transition:opacity .15s;}
 .btn:active{opacity:.7;}
-.btn-primary{background:var(--cyan2);color:#000;}
-.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan2);}
+.btn-p{background:var(--cyan2);color:#000;}
+.btn-o{background:transparent;color:var(--cyan);border:1px solid var(--cyan2);}
 .btn-sm{padding:8px 14px;width:auto;font-size:13px;}
 .btn:disabled{opacity:.35;cursor:not-allowed;}
-.input-group{margin-bottom:12px;}
-.input-group label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
-.input-group input,.input-group textarea{width:100%;background:var(--bg3);
-  border:1px solid #333;border-radius:8px;padding:10px 12px;color:var(--text);
-  font-size:14px;outline:none;}
-.input-group input:focus,.input-group textarea:focus{border-color:var(--cyan2);}
-.input-group textarea{resize:vertical;min-height:90px;font-family:monospace;font-size:12px;}
+.ig{margin-bottom:12px;}
+.ig label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
+.ig input,.ig textarea{width:100%;background:var(--bg3);border:1px solid #333;
+  border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;}
+.ig input:focus,.ig textarea:focus{border-color:var(--cyan2);}
+.ig textarea{resize:vertical;min-height:90px;font-family:monospace;font-size:12px;}
 .hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
-.ip-row{display:flex;align-items:center;justify-content:space-between;
-        padding:10px 0;border-bottom:1px solid #222;font-size:13px;}
-.ip-row:last-child{border-bottom:none;}
-.ip-row .name{color:var(--muted);font-size:12px;margin-top:2px;}
-.ip-dup{color:var(--red);font-size:11px;font-weight:600;}
-.ip-ok {color:var(--green);font-size:11px;}
-.profile-card{background:var(--bg3);border-radius:10px;padding:12px 14px;
-              margin-bottom:8px;border-left:3px solid var(--cyan2);}
-.profile-card .pname{font-size:14px;font-weight:600;color:var(--cyan);}
-.profile-card .pinfo{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
-.profile-card .pstatus{font-size:11px;font-weight:600;margin-top:6px;}
+.iprow{display:flex;align-items:center;justify-content:space-between;
+       padding:10px 0;border-bottom:1px solid #222;font-size:13px;}
+.iprow:last-child{border-bottom:none;}
+.iprow .sub{color:var(--muted);font-size:12px;margin-top:2px;}
+.idup{color:var(--red);font-size:11px;font-weight:600;}
+.iok {color:var(--green);font-size:11px;}
+.pc{background:var(--bg3);border-radius:10px;padding:12px 14px;
+    margin-bottom:8px;border-left:3px solid var(--cyan2);}
+.pc .pn{font-size:14px;font-weight:600;color:var(--cyan);}
+.pc .pi{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
+.pc .ps{font-size:11px;font-weight:600;margin-top:6px;}
 .cancelled{color:var(--red);} .delivered{color:var(--green);} .pending{color:var(--warn);}
-.search-wrap{position:relative;margin-bottom:12px;}
-.search-wrap input{width:100%;background:var(--bg3);border:1px solid #333;
-  border-radius:8px;padding:10px 12px 10px 36px;color:var(--text);font-size:14px;outline:none;}
-.search-wrap input:focus{border-color:var(--cyan2);}
-.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);
-             color:var(--muted);font-size:16px;pointer-events:none;}
+.sw{position:relative;margin-bottom:12px;}
+.sw input{width:100%;background:var(--bg3);border:1px solid #333;border-radius:8px;
+          padding:10px 12px 10px 36px;color:var(--text);font-size:14px;outline:none;}
+.sw input:focus{border-color:var(--cyan2);}
+.si{position:absolute;left:10px;top:50%;transform:translateY(-50%);
+    color:var(--muted);font-size:16px;pointer-events:none;}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
        background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;
        opacity:0;transition:opacity .3s;z-index:100;white-space:nowrap;pointer-events:none;}
 #toast.show{opacity:1;}
-.divider{height:1px;background:#222;margin:16px 0;}
-.row-btns{display:flex;gap:8px;margin-bottom:8px;}
-.row-btns .btn{margin-bottom:0;}
-.cfg-status{font-size:12px;padding:6px 10px;border-radius:6px;margin-bottom:12px;}
-.cfg-ok  {background:#003010;color:var(--green);border:1px solid #005020;}
-.cfg-warn{background:#2a1800;color:var(--warn); border:1px solid #553000;}
+.div{height:1px;background:#222;margin:16px 0;}
+.rbtns{display:flex;gap:8px;margin-bottom:8px;}
+.rbtns .btn{margin-bottom:0;}
+.csts{font-size:12px;padding:6px 10px;border-radius:6px;margin-bottom:12px;}
+.csok {background:#003010;color:var(--green);border:1px solid #005020;}
+.cswn{background:#2a1800;color:var(--warn);border:1px solid #553000;}
 </style>
 </head>
 <body>
-
 <header>
   <h1>🌐 IP Checker</h1>
-  <p id="hdr-status">Đang khởi động...</p>
+  <p id="hst">Đang khởi động...</p>
 </header>
-
 <nav>
-  <button class="active" onclick="showPage('home')">🏠 Home</button>
-  <button onclick="showPage('history')">📋 IP List</button>
-  <button onclick="showPage('profiles')">👤 Profiles</button>
-  <button onclick="showPage('settings')">⚙️ Cài đặt</button>
+  <button class="active" onclick="go('home')">🏠 Home</button>
+  <button onclick="go('history')">📋 IP List</button>
+  <button onclick="go('profiles')">👤 Profiles</button>
+  <button onclick="go('settings')">⚙️ Cài đặt</button>
 </nav>
 
-<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="card">
     <div class="card-title">IP hiện tại</div>
-    <div class="ip-big" id="my-ip">...</div>
-    <div id="ip-status"></div>
+    <div class="ip-big" id="myip">...</div>
+    <div id="ipst"></div>
   </div>
-  <button class="btn btn-primary" onclick="checkAndPush()" id="btn-check">
-    🔍 Kiểm tra &amp; Ghi lên Sheet
-  </button>
-  <button class="btn btn-outline" onclick="checkOnly()" id="btn-checkonly">
-    👁 Chỉ kiểm tra (không ghi)
-  </button>
-  <div class="card" id="dup-detail" style="display:none">
-    <div class="card-title">⚠️ IP này đang dùng bởi</div>
-    <div id="dup-list"></div>
+  <button class="btn btn-p" onclick="checkAndPush()" id="bc">🔍 Kiểm tra &amp; Ghi lên Sheet</button>
+  <button class="btn btn-o" onclick="checkOnly()" id="bco">👁 Chỉ kiểm tra (không ghi)</button>
+  <div class="card" id="dupcard" style="display:none">
+    <div class="card-title">⚠️ IP đã xuất hiện trước đây trong 24h</div>
+    <div id="dupmsg"></div>
   </div>
 </div>
 
-<!-- IP LIST -->
 <div id="page-history" class="page">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="search-ip" placeholder="Tìm IP hoặc tên..." oninput="filterHistory()">
+  <div class="sw"><span class="si">🔍</span>
+    <input type="text" id="srip" placeholder="Tìm IP..." oninput="filterHist()">
   </div>
-  <div id="history-list">
-    <div style="color:var(--muted);text-align:center;padding:40px 0">
-      Chưa tải. Về Home → Kiểm tra IP.
-    </div>
-  </div>
-  <button class="btn btn-outline" style="margin-top:8px" onclick="refreshHistory()">
-    🔄 Làm mới từ Sheet
-  </button>
+  <div id="histlist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải. Về Home → Kiểm tra IP.</div></div>
+  <button class="btn btn-o" style="margin-top:8px" onclick="refreshHist()">🔄 Làm mới từ Sheet</button>
 </div>
 
-<!-- PROFILES -->
 <div id="page-profiles" class="page">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="search-profile" placeholder="Tìm tên, shop, tracking..."
-           oninput="filterProfiles()">
+  <div class="sw"><span class="si">🔍</span>
+    <input type="text" id="srpr" placeholder="Tìm tên, shop, tracking..." oninput="filterProf()">
   </div>
-  <div id="profile-list">
-    <div style="color:var(--muted);text-align:center;padding:40px 0">
-      Chưa tải.
-    </div>
-  </div>
-  <button class="btn btn-outline" style="margin-top:8px" onclick="loadProfiles()">
-    🔄 Tải Profiles từ Sheet
-  </button>
+  <div id="proflist"><div style="color:var(--muted);text-align:center;padding:40px 0">Chưa tải.</div></div>
+  <button class="btn btn-o" style="margin-top:8px" onclick="loadProfiles()">🔄 Tải Profiles từ Sheet</button>
 </div>
 
-<!-- SETTINGS -->
 <div id="page-settings" class="page">
   <div class="card">
-    <div class="card-title">Cấu hình Google Sheets</div>
-    <div id="cfg-indicator" class="cfg-status cfg-warn">⚠️ Chưa cấu hình</div>
-
-    <div class="input-group">
+    <div class="card-title">Google Sheets</div>
+    <div id="cfgind" class="csts cswn">⚠️ Chưa cấu hình</div>
+    <div class="ig">
       <label>Spreadsheet ID</label>
-      <input type="text" id="cfg-sid" placeholder="Lấy từ URL của Google Sheet">
+      <input type="text" id="csid" placeholder="Lấy từ URL của Google Sheet">
     </div>
-    <div class="input-group">
-      <label>Service Account JSON <span style="color:var(--green)">(đọc + ghi)</span>
-        hoặc API Key <span style="color:var(--warn)">(chỉ đọc)</span></label>
-      <textarea id="cfg-key" placeholder="Dán nội dung file service_account.json&#10;hoặc API Key (AIza...)"></textarea>
-      <div class="hint">Service Account JSON cho phép ghi IP lên Sheet. API Key chỉ xem được.</div>
+    <div class="ig">
+      <label>Service Account JSON <span style="color:var(--green)">(đọc+ghi)</span> hoặc API Key <span style="color:var(--warn)">(chỉ đọc)</span></label>
+      <textarea id="ckey" placeholder="Dán nội dung service_account.json&#10;hoặc API Key (AIza...)"></textarea>
+      <div class="hint">Service Account cho phép ghi IP. API Key chỉ đọc.</div>
     </div>
-    <div class="input-group">
-      <label>Tên thiết bị</label>
-      <input type="text" id="cfg-device" placeholder="VD: Samsung_S23">
+    <div class="ig">
+      <label>Tên thiết bị (không bắt buộc)</label>
+      <input type="text" id="cdev" placeholder="VD: Samsung_S23">
     </div>
-
-    <div class="row-btns">
-      <button class="btn btn-primary btn-sm" onclick="saveSettings()">💾 Lưu</button>
-      <button class="btn btn-outline btn-sm" onclick="testConnection()">🔌 Test</button>
-      <button class="btn btn-outline btn-sm" onclick="clearCache()" style="color:var(--red);border-color:var(--red)">🗑 Xóa</button>
+    <div class="rbtns">
+      <button class="btn btn-p btn-sm" onclick="saveCfg()">💾 Lưu</button>
+      <button class="btn btn-o btn-sm" onclick="testConn()">🔌 Test</button>
+      <button class="btn btn-o btn-sm" onclick="clrCache()" style="color:var(--red);border-color:var(--red)">🗑 Xóa</button>
     </div>
-
-    <div class="divider"></div>
+    <div class="div"></div>
     <div class="hint" style="line-height:1.9">
-      💡 Mở bằng Chrome → menu ⋮ → <b>Thêm vào màn hình chính</b> để dùng như app.<br>
-      💡 Sau khi lưu cài đặt lần đầu, app sẽ tự động kiểm tra IP mỗi lần mở.
+      💡 Mở bằng Chrome → ⋮ → <b>Thêm vào màn hình chính</b> để dùng như app.<br>
+      💡 Lưu cài đặt xong thì về Home → Kiểm tra IP.
     </div>
   </div>
 </div>
@@ -187,452 +157,379 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
-// ★ CẤU HÌNH MẶC ĐỊNH – thay bằng thông tin thực (hoặc để trống, dùng cài đặt)
+// ★ CẤU HÌNH MẶC ĐỊNH – điền vào đây để không cần cài đặt lại mỗi lần
 // ══════════════════════════════════════════════════════════════════════════════
-const DEFAULT_SHEET_ID  = "";   // VD: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"
-const DEFAULT_API_KEY   = ``;   // Dán nội dung JSON hoặc API Key
-const DEFAULT_DEVICE    = "Android";
+const DEF_SID = "1HGOPZy3PY2XM9F0PH1S8uPtePPuBlHfNplI_JbU_B4o";   // Spreadsheet ID
+const DEF_KEY = `{
+  "type": "service_account",
+  "project_id": "bold-momentum-447217-i9",
+  "private_key_id": "3a990f4358f4daa73e5adb1433cecddf03b1e0e2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCHCOfCJNptPON\n2w+asJRaMYDnAfzJzv8nwNMJQldwsOPBTMGMhYw/g67wWZd86Fu8GOWx0wt+BFKi\nYDPM8nMmd8e/9nBlsAnaEeyVef3wB5omsAm889DFpfwctK59RtrgLAfIsCOp3wcN\n5n/J+ZlJr4h0W0wv6ajv/OmLchxiCI+Exict0j+qq8tIrO+qr+WH333gyC70ZxC4\nuFhqfVlZuFT3yIjKj+STSUezg4LNblG2a1TSgTG/A3Ekz+H9MlwFtbhqHgMxpS3i\nesQfSZjeXbTKIyxOXPdWmCxKAs5yOMyh+vs5i/dmIGkP14U3XSh/tb76UwxIWNQ2\nx5W7oOE3AgMBAAECggEAWLT/WmhS5dX6D/Pyd6EGywkgfXGdEqT0Wjh2uR6GU0uj\nae0n7o4Bf+0v/0sSPdT6R0WhgtiNwfM7yFTql1idYxEOSh3XU8FVX0Edu1nawNzY\nh6GfcaiC2jB2vK+dpkbBM/0rOX21bqYr1SBneegFM3VyiKpIcQT5XWNZX46whePS\n1gv5Q/rUKnSsSjyEDk7sTwLXqLnZIeqdWDzhHpiktHWsOsSajcSEnv31yCOFjMnf\nrUnMritAslrBYwuEh9e1cdYVaH5om/sjbKdGdw+RNARaCgZeK0BItte45RReKy8p\nOl1NdtROn8GeGQoT7Eu3VbUi//Vy3tSzskYj3BWwMQKBgQD2woOQUxkrEszT05wd\n7zF62866E9eL4rZBAQlrwl5NmglMp75OS70eePPcch0dYinVJ3OneOC8Vt9HVtC8\nIXCpVOjBcz0nHaCVCFlUY04fotASeM9zgNfhzwr2mkHYroTy545ELCZ4xE/fi5T5\nLoQ2UArU/fQWc8bk9L/9y+zCKwKBgQDJYOnR6yaOfOM76mZlJ2ydh+Hd+heu/Idu\nKk3ul8wj7dIA1psdorbJJmXbnwB+nVgbmhV1CfbDwdyAqri8jsZsIC38ds2RITNS\nvyGhzZtuQtbwB3AzZTxLD9j6SoXEEpo4qWSy6gdOFM/JRqXCU1nqQkwdhLN0XceK\nXv2Bl07zJQKBgAFd5HKpMyt86CuIMYYs6/49N3DqaTg6Ij5L7ixtoC4X21NUXoZ6\nfuqrStZ+v1CJWaf3lvlnfv8sEAKKJY/VM5WMhdmEdONBk8EfkbcY8bbVJQflKWj/\nXrK+fdYN1q2Hke7yf2Q7Rl9G3xZi5IlYy5ytZtH1MiPpskFUZbfXKFGPAoGAGdH+\nSPcgq3Zh4GXOmTuz1oL8t+yAKuSgLMTp1yTJfPXaTlc17lfVnfb5am55rsJX8LoR\n9D7B0BnEPw8kvrCDyotZuhw1gV1DamGtW0S0oC+bxYz+muhpEarHhFgXzKsh8Q/v\nJG2TYDSU69bOHBt51OqJPeOs6se3dQt2763J5q0CgYEA0QJU4SjOf4dCdqCG+XtJ\nS9SWmwYGd63uFs5hsh2LFJhIIB68jTTk2QkaUIHDjMNTw77nOE6GGIVFJRe21Vx4\njUEVt5wBoqDDNJq9T/dGs8HMJ62dlTGaeWrkLRZ9mgo4+6GkpRr91Y6DGXLBMQOy\nwSTSwGw1H+k2OIEpim9p3K8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "v-691-565@bold-momentum-447217-i9.iam.gserviceaccount.com",
+  "client_id": "104408507449755926172",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/v-691-565%40bold-momentum-447217-i9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
+`;   // Service Account JSON hoặc API Key
+const DEF_DEV = "Android";
 // ══════════════════════════════════════════════════════════════════════════════
 
 let cfg = {};
-let ipHistory  = [];
-let allProfiles= [];
-let myIp = null;
+let ipHist = [];      // [{ip, time}]  giống ip_history.json
+let profs  = [];
+let myip   = null;
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 window.onload = async () => {
-  loadConfig();
-  updateCfgIndicator();
-  updateHdrStatus();
+  loadCfg();
+  updCfgUI();
+  updHdr();
   await getMyIp();
-  if (isConfigured()) {
-    await checkOnly();
-  }
+  if (isOk()) await checkOnly();
 };
 
-function loadConfig() {
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem('ipc_cfg') || '{}'); } catch(e){}
+function loadCfg() {
+  let sv = {};
+  try { sv = JSON.parse(localStorage.getItem('ipc_cfg') || '{}'); } catch(e) {}
   cfg = {
-    sheetId: saved.sheetId || DEFAULT_SHEET_ID,
-    apiKey:  saved.apiKey  || DEFAULT_API_KEY,
-    device:  saved.device  || DEFAULT_DEVICE,
+    sid: sv.sid || DEF_SID,
+    key: sv.key || DEF_KEY,
+    dev: sv.dev || DEF_DEV,
   };
-  document.getElementById('cfg-sid').value    = saved.sheetId || '';
-  document.getElementById('cfg-key').value    = saved.apiKey  || '';
-  document.getElementById('cfg-device').value = saved.device  || '';
+  document.getElementById('csid').value = sv.sid || '';
+  document.getElementById('ckey').value = sv.key || '';
+  document.getElementById('cdev').value = sv.dev || '';
 }
 
-function saveSettings() {
-  const sid = document.getElementById('cfg-sid').value.trim();
-  const key = document.getElementById('cfg-key').value.trim();
-  const dev = document.getElementById('cfg-device').value.trim();
-  // Lưu vào localStorage (ghi đè default nếu có giá trị)
-  const saved = {};
-  if (sid) saved.sheetId = sid;
-  if (key) saved.apiKey  = key;
-  if (dev) saved.device  = dev;
-  localStorage.setItem('ipc_cfg', JSON.stringify(saved));
-  // Reload cfg (merge với default)
-  loadConfig();
-  updateCfgIndicator();
-  updateHdrStatus();
-  // Reset token cache khi đổi key
-  sessionStorage.removeItem('_token');
-  sessionStorage.removeItem('_token_exp');
-  toast('✅ Đã lưu cài đặt');
+function saveCfg() {
+  const sv = {};
+  const sid = document.getElementById('csid').value.trim();
+  const key = document.getElementById('ckey').value.trim();
+  const dev = document.getElementById('cdev').value.trim();
+  if (sid) sv.sid = sid;
+  if (key) sv.key = key;
+  if (dev) sv.dev = dev;
+  localStorage.setItem('ipc_cfg', JSON.stringify(sv));
+  sessionStorage.removeItem('_tk'); sessionStorage.removeItem('_te');
+  loadCfg(); updCfgUI(); updHdr();
+  toast('✅ Đã lưu');
 }
 
-function clearCache() {
-  if (!confirm('Xoá cache & cài đặt đã lưu? (Cài đặt mặc định trong code vẫn còn)')) return;
+function clrCache() {
+  if (!confirm('Xóa cache & cài đặt đã lưu?')) return;
   localStorage.removeItem('ipc_cfg');
-  localStorage.removeItem('ipc_history');
-  localStorage.removeItem('ipc_profiles');
+  localStorage.removeItem('ipc_hist');
+  localStorage.removeItem('ipc_profs');
   sessionStorage.clear();
-  ipHistory = {}; allProfiles = []; myIp = null;
-  loadConfig();
-  updateCfgIndicator();
+  ipHist = []; profs = []; myip = null;
+  loadCfg(); updCfgUI();
   location.reload();
 }
 
-function isConfigured() {
-  return !!(cfg.sheetId && cfg.apiKey);
-}
+function isOk()  { return !!(cfg.sid && cfg.key); }
+function isSA()  { try { JSON.parse(cfg.key); return true; } catch(e) { return false; } }
 
-function updateCfgIndicator() {
-  const el = document.getElementById('cfg-indicator');
-  if (isConfigured()) {
-    el.className = 'cfg-status cfg-ok';
-    el.textContent = '✅ Đã cấu hình' + (DEFAULT_SHEET_ID ? ' (mặc định)' : ' (tùy chỉnh)');
-  } else {
-    el.className = 'cfg-status cfg-warn';
-    el.textContent = '⚠️ Chưa cấu hình – điền Spreadsheet ID và API Key bên dưới';
-  }
+function updCfgUI() {
+  const el = document.getElementById('cfgind');
+  if (isOk()) { el.className='csts csok'; el.textContent='✅ Đã cấu hình'; }
+  else         { el.className='csts cswn'; el.textContent='⚠️ Chưa cấu hình – điền bên dưới'; }
 }
-
-function updateHdrStatus() {
-  document.getElementById('hdr-status').textContent =
-    isConfigured()
-      ? `Sheet: ${cfg.sheetId.slice(0,24)}...`
-      : 'Chưa cấu hình – vào ⚙️ Cài đặt';
+function updHdr() {
+  document.getElementById('hst').textContent =
+    isOk() ? ('Sheet: ' + cfg.sid.slice(0,24) + '...') : 'Chưa cấu hình – vào ⚙️';
 }
 
 // ── Sheets API ────────────────────────────────────────────────────────────────
-function isSA() {
-  try { JSON.parse(cfg.apiKey); return true; } catch(e) { return false; }
-}
-
-async function sheetsGet(range) {
-  if (!isConfigured()) throw new Error('Chưa cấu hình');
+async function shGet(range) {
+  if (!isOk()) throw new Error('Chưa cấu hình');
   if (!isSA()) {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}?key=${cfg.apiKey}`;
-    const r = await fetch(url);
+    const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}?key=${cfg.key}`);
     if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
     return (await r.json()).values || [];
   }
-  const token = await getAccessToken();
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}`;
-  const r = await fetch(url, {headers:{Authorization:`Bearer ${token}`}});
+  const tk = await getTk();
+  const r  = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}`,
+    {headers:{Authorization:'Bearer '+tk}});
   if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
   return (await r.json()).values || [];
 }
 
-async function sheetsBatchUpdate(range, values) {
+async function shAppend(range, values) {
   if (!isSA()) throw new Error('Cần Service Account JSON để ghi');
-  const token = await getAccessToken();
-  const r = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values:batchUpdate`,
-    {
-      method:'POST',
-      headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
-      body:JSON.stringify({valueInputOption:'USER_ENTERED',data:[{range,values}]}),
-    }
-  );
+  const tk = await getTk();
+  const r  = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sid}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+    {method:'POST', headers:{Authorization:'Bearer '+tk,'Content-Type':'application/json'},
+     body:JSON.stringify({values})});
   if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
 }
 
-async function sheetsAppend(range, values) {
-  if (!isSA()) throw new Error('Cần Service Account JSON để ghi');
-  const token = await getAccessToken();
-  const r = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${cfg.sheetId}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
-    {
-      method:'POST',
-      headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
-      body:JSON.stringify({values}),
-    }
-  );
-  if (!r.ok) { const e=await r.json(); throw new Error(e.error?.message||r.status); }
+// ── JWT ───────────────────────────────────────────────────────────────────────
+function b64u(str) {
+  return btoa(unescape(encodeURIComponent(str))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+}
+function b64ub(bytes) {
+  let s=''; for(let i=0;i<bytes.length;i++) s+=String.fromCharCode(bytes[i]);
+  return btoa(s).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
 }
 
-// ── JWT / Access Token ────────────────────────────────────────────────────────
-// Dùng TextEncoder để encode đúng UTF-8, tránh lỗi btoa với Unicode
-function b64url(str) {
-  return btoa(unescape(encodeURIComponent(str)))
-    .replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
-}
-function b64urlBytes(bytes) {
-  let bin = '';
-  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
-  return btoa(bin).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
-}
-
-async function getAccessToken() {
-  const cached = sessionStorage.getItem('_token');
-  const exp    = parseInt(sessionStorage.getItem('_token_exp')||'0');
+async function getTk() {
+  const cached = sessionStorage.getItem('_tk');
+  const exp    = parseInt(sessionStorage.getItem('_te')||'0');
   if (cached && Date.now() < exp) return cached;
 
-  const sa  = JSON.parse(cfg.apiKey);
+  const sa  = JSON.parse(cfg.key);
   const now = Math.floor(Date.now()/1000);
+  const hdr = {alg:'RS256',typ:'JWT'};
+  const pay = {iss:sa.client_email,
+               scope:'https://www.googleapis.com/auth/spreadsheets',
+               aud:'https://oauth2.googleapis.com/token',
+               iat:now, exp:now+3600};
+  const si  = b64u(JSON.stringify(hdr)) + '.' + b64u(JSON.stringify(pay));
 
-  const header  = {alg:'RS256',typ:'JWT'};
-  const payload = {
-    iss:   sa.client_email,
-    scope: 'https://www.googleapis.com/auth/spreadsheets',
-    aud:   'https://oauth2.googleapis.com/token',
-    iat:   now,
-    exp:   now + 3600,
-  };
+  const pem = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n|\r/g,'');
+  const der = atob(pem);
+  const buf = new Uint8Array(der.length);
+  for(let i=0;i<der.length;i++) buf[i]=der.charCodeAt(i);
 
-  const headerB64  = b64url(JSON.stringify(header));
-  const payloadB64 = b64url(JSON.stringify(payload));
-  const sigInput   = `${headerB64}.${payloadB64}`;
-
-  // Import RSA private key
-  const pem = sa.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n/g, '');
-  const derBin  = atob(pem);
-  const derArr  = new Uint8Array(derBin.length);
-  for (let i=0;i<derBin.length;i++) derArr[i]=derBin.charCodeAt(i);
-
-  const cryptoKey = await crypto.subtle.importKey(
-    'pkcs8', derArr.buffer,
-    {name:'RSASSA-PKCS1-v1_5', hash:{name:'SHA-256'}},
-    false, ['sign']
-  );
-
-  const sigBuf = await crypto.subtle.sign(
-    {name:'RSASSA-PKCS1-v1_5'},
-    cryptoKey,
-    new TextEncoder().encode(sigInput)
-  );
-  const sigB64 = b64urlBytes(new Uint8Array(sigBuf));
-  const jwt    = `${sigInput}.${sigB64}`;
+  const key = await crypto.subtle.importKey('pkcs8', buf.buffer,
+    {name:'RSASSA-PKCS1-v1_5', hash:{name:'SHA-256'}}, false, ['sign']);
+  const sig = await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'}, key,
+    new TextEncoder().encode(si));
+  const jwt = si + '.' + b64ub(new Uint8Array(sig));
 
   const resp = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
+    method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion='+jwt,
   });
   const data = await resp.json();
   if (!data.access_token) throw new Error('Token error: '+JSON.stringify(data));
-
-  sessionStorage.setItem('_token', data.access_token);
-  sessionStorage.setItem('_token_exp', String((now+3500)*1000));
+  sessionStorage.setItem('_tk', data.access_token);
+  sessionStorage.setItem('_te', String((now+3500)*1000));
   return data.access_token;
 }
 
-// ── IP helpers ────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 async function getMyIp() {
-  document.getElementById('my-ip').textContent='⏳';
-  try { myIp=(await(await fetch('https://api.ipify.org?format=json')).json()).ip; }
-  catch(e) {
-    try { myIp=(await(await fetch('https://api.myip.com')).json()).ip; }
-    catch(e2) { myIp=null; }
-  }
-  document.getElementById('my-ip').textContent = myIp||'(Không lấy được)';
+  document.getElementById('myip').textContent='⏳';
+  try { myip=(await(await fetch('https://api.ipify.org?format=json')).json()).ip; }
+  catch(e){ try{ myip=(await(await fetch('https://api.myip.com')).json()).ip; }catch(e2){ myip=null; } }
+  document.getElementById('myip').textContent = myip||'(Không lấy được)';
 }
 
-async function loadIpHistory() {
-  const rows = await sheetsGet('IP_History!A:B');
-  ipHistory  = [];   // [{ip, time}]
+async function loadIpHist() {
+  const rows = await shGet('IP_History!A:B');
+  ipHist = [];
   for (const r of rows.slice(1)) {
-    if (r[0]) ipHistory.push({ip: r[0], time: r[1]||''});
+    if (r[0]) ipHist.push({ip:r[0], time:r[1]||''});
   }
-  localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
+  localStorage.setItem('ipc_hist', JSON.stringify(ipHist));
 }
 
-// Kiểm tra ip có trong 24h gần đây không (giống logic PC)
+// Kiểm tra ip có xuất hiện trong 24h không (giống logic PC)
 function isDup(ip) {
-  const now = Date.now();
-  const h24 = 24 * 60 * 60 * 1000;
-  return ipHistory.some(r => {
+  const now = Date.now(), h24 = 24*60*60*1000;
+  return ipHist.some(function(r) {
     if (r.ip !== ip) return false;
-    try {
-      const t = new Date(r.time.replace(' ','T')).getTime();
-      return (now - t) <= h24;
-    } catch(e) { return false; }
+    try { return (now - new Date(r.time.replace(' ','T')).getTime()) <= h24; }
+    catch(e) { return false; }
   });
 }
 
-// ── Append IP mới lên sheet (giống append vào ip_history.json) ───────────────
+// Format datetime YYYY-MM-DD HH:MM:SS
+function nowStr() {
+  const d=new Date(), pad=n=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+
+         pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+
 async function appendMyIp() {
-  // Format datetime: YYYY-MM-DD HH:MM:SS (giống Python)
-  const now = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  const timeStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-  await sheetsAppend('IP_History!A:B', [[myIp, timeStr]]);
-  // Cập nhật cache local
-  ipHistory.push({ip: myIp, time: timeStr});
-  localStorage.setItem('ipc_history', JSON.stringify(ipHistory));
+  const t = nowStr();
+  await shAppend('IP_History!A:B', [[myip, t]]);
+  ipHist.push({ip:myip, time:t});
+  localStorage.setItem('ipc_hist', JSON.stringify(ipHist));
 }
 
 // ── Actions ───────────────────────────────────────────────────────────────────
+function setBtns(d) {
+  document.getElementById('bc').disabled  = d;
+  document.getElementById('bco').disabled = d;
+}
+
+function showSt(type, msg) {
+  document.getElementById('ipst').innerHTML =
+    '<span class="sbadge '+type+'">'+msg+'</span>';
+  document.getElementById('dupcard').style.display='none';
+}
+
+function showRes(dup) {
+  if (!dup) {
+    showSt('ok','✅ IP chưa xuất hiện trong 24h');
+  } else {
+    document.getElementById('ipst').innerHTML =
+      '<span class="sbadge dup">⚠️ IP đã xuất hiện trong 24h!</span>';
+    document.getElementById('dupmsg').textContent =
+      'IP này đã được ghi nhận trước đây trong vòng 24 giờ.';
+    document.getElementById('dupcard').style.display='block';
+  }
+}
+
 async function checkOnly() {
-  if (!myIp) await getMyIp();
-  if (!myIp) { showStatus('warn','⚠️ Không lấy được IP'); return; }
-  if (!isConfigured()) { showStatus('warn','⚠️ Chưa cấu hình Sheet'); return; }
-  showStatus('load','⏳ Đang kiểm tra...');
-  setBtns(true);
+  if (!myip) await getMyIp();
+  if (!myip) { showSt('warn','⚠️ Không lấy được IP'); return; }
+  if (!isOk()) { showSt('warn','⚠️ Chưa cấu hình Sheet'); return; }
+  showSt('load','⏳ Đang kiểm tra...'); setBtns(true);
   try {
-    await loadIpHistory();
-    showResult(isDup(myIp));
-    renderHistory();
-  } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
+    await loadIpHist();
+    showRes(isDup(myip));
+    renderHist();
+  } catch(e) { showSt('warn','⚠️ '+e.message); }
   finally { setBtns(false); }
 }
 
 async function checkAndPush() {
-  if (!myIp) await getMyIp();
-  if (!myIp) { showStatus('warn','⚠️ Không lấy được IP'); return; }
-  if (!isConfigured()) { showStatus('warn','⚠️ Chưa cấu hình Sheet'); return; }
+  if (!myip) await getMyIp();
+  if (!myip) { showSt('warn','⚠️ Không lấy được IP'); return; }
+  if (!isOk()) { showSt('warn','⚠️ Chưa cấu hình Sheet'); return; }
   if (!isSA()) { toast('⚠️ Cần Service Account JSON để ghi'); await checkOnly(); return; }
-
-  showStatus('load','⏳ Kiểm tra & ghi lên Sheet...');
-  setBtns(true);
+  showSt('load','⏳ Kiểm tra & ghi lên Sheet...'); setBtns(true);
   try {
-    await loadIpHistory();
-    const dup = isDup(myIp);
+    await loadIpHist();
+    const dup = isDup(myip);
     await appendMyIp();
-    showResult(dup);
-    renderHistory();
+    showRes(dup);
+    renderHist();
     toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
-  } catch(e) { showStatus('warn',`⚠️ ${e.message}`); }
+  } catch(e) { showSt('warn','⚠️ '+e.message); }
   finally { setBtns(false); }
 }
 
-function showResult(isDuplicate) {
-  const el = document.getElementById('ip-status');
-  const dd = document.getElementById('dup-detail');
-  if (!isDuplicate) {
-    el.innerHTML='<span class="status-badge badge-ok">✅ IP chưa xuất hiện trong 24h</span>';
-    dd.style.display='none';
-  } else {
-    el.innerHTML='<span class="status-badge badge-dup">⚠️ IP đã xuất hiện trong 24h gần đây!</span>';
-    dd.style.display='none';  // không cần hiện detail
-  }
-}
-
-function showStatus(type,msg) {
-  const cls={load:'badge-load',ok:'badge-ok',dup:'badge-dup',warn:'badge-warn'}[type]||'';
-  document.getElementById('ip-status').innerHTML=
-    `<span class="status-badge ${cls}">${msg}</span>`;
-  document.getElementById('dup-detail').style.display='none';
-}
-
-function setBtns(d) {
-  document.getElementById('btn-check').disabled=d;
-  document.getElementById('btn-checkonly').disabled=d;
-}
-
 // ── Render IP list ────────────────────────────────────────────────────────────
-function renderHistory(filter='') {
-  const el  = document.getElementById('history-list');
-  const txt = filter.toLowerCase();
-  const now = Date.now();
-  const h24 = 24*60*60*1000;
-  const ipCount = {};
-  for (const r of ipHistory) ipCount[r.ip]=(ipCount[r.ip]||0)+1;
-  let list = [...ipHistory];
-  if (txt) list=list.filter(r=>r.ip.includes(txt));
-  if (!list.length){
+function renderHist(filter) {
+  const el  = document.getElementById('histlist');
+  const txt = (filter||'').toLowerCase();
+  const now = Date.now(), h24 = 24*60*60*1000;
+  const cnt = {};
+  for (const r of ipHist) cnt[r.ip]=(cnt[r.ip]||0)+1;
+  let list = ipHist.slice();
+  if (txt) list = list.filter(function(r){ return r.ip.includes(txt); });
+  if (!list.length) {
     el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không có dữ liệu</div>';
     return;
   }
-  list.sort((a,b)=>b.time.localeCompare(a.time));
-  el.innerHTML=list.map(r=>{
-    const dup=ipCount[r.ip]>1;
-    let in24=false;
-    try{const t=new Date(r.time.replace(' ','T')).getTime();in24=(now-t)<=h24;}catch(e){}
-    const color=dup?'var(--red)':(in24?'var(--warn)':'var(--text)');
-    return `<div class="ip-row">
-      <div>
-        <div style="font-size:14px;color:${color}">${r.ip}</div>
-        <div class="name">${r.time}</div>
-      </div>
-      <div class="${dup?'ip-dup':'ip-ok'}">${dup?'⚠️ TRÙNG':'✅'}</div>
-    </div>`;
-  }).join('');
-}
-  entries.sort((a,b)=>(ipCount[b[1]]>1?1:0)-(ipCount[a[1]]>1?1:0));
-  el.innerHTML=entries.map(([name,ip])=>{
-    const dup=ipCount[ip]>1;
-    return `<div class="ip-row">
-      <div>
-        <div style="font-size:14px;color:${dup?'var(--red)':'var(--text)'}">${ip}</div>
-        <div class="name">${name}</div>
-      </div>
-      <div class="${dup?'ip-dup':'ip-ok'}">${dup?'⚠️ TRÙNG':'✅'}</div>
-    </div>`;
+  list.sort(function(a,b){ return b.time > a.time ? 1 : -1; });
+  el.innerHTML = list.map(function(r) {
+    const dup = cnt[r.ip] > 1;
+    var in24 = false;
+    try { in24 = (now - new Date(r.time.replace(' ','T')).getTime()) <= h24; } catch(e){}
+    const color = dup ? 'var(--red)' : (in24 ? 'var(--warn)' : 'var(--text)');
+    return '<div class="iprow">' +
+      '<div><div style="font-size:14px;color:'+color+'">'+r.ip+'</div>' +
+      '<div class="sub">'+r.time+'</div></div>' +
+      '<div class="'+(dup?'idup':'iok')+'">'+(dup?'⚠️ TRÙNG':'✅')+'</div>' +
+      '</div>';
   }).join('');
 }
 
-function filterHistory(){ renderHistory(document.getElementById('search-ip').value); }
+function filterHist() { renderHist(document.getElementById('srip').value); }
 
-async function refreshHistory() {
-  if (!isConfigured()) { toast('Chưa cấu hình'); return; }
-  try {
-    await loadIpHistory();
-    renderHistory(document.getElementById('search-ip').value);
-    toast('✅ Đã làm mới');
-  } catch(e) { toast('❌ '+e.message); }
+async function refreshHist() {
+  if (!isOk()) { toast('Chưa cấu hình'); return; }
+  try { await loadIpHist(); renderHist(document.getElementById('srip').value); toast('✅ Đã làm mới'); }
+  catch(e) { toast('❌ '+e.message); }
 }
 
 // ── Profiles ──────────────────────────────────────────────────────────────────
 async function loadProfiles() {
-  if (!isConfigured()) { toast('Chưa cấu hình'); return; }
-  const el=document.getElementById('profile-list');
+  if (!isOk()) { toast('Chưa cấu hình'); return; }
+  const el = document.getElementById('proflist');
   el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">⏳ Đang tải...</div>';
   try {
-    const rows=await sheetsGet('Profiles!A:AH');
-    if (rows.length<2){ el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">Sheet trống</div>'; return; }
-    const hdr=rows[0];
-    const idx=n=>hdr.indexOf(n);
-    allProfiles=rows.slice(1).filter(r=>r[0]).map(r=>({
-      name:           r[idx('name')]||'',
-      shop_name:      r[idx('shop_name')]||'',
-      product_name:   r[idx('product_name')]||'',
-      tracking_code:  r[idx('tracking_code')]||'',
-      phone_number:   r[idx('phone_number')]||'',
-      delivery_status:r[idx('delivery_status')]||'',
-      price:          r[idx('price')]||'',
-      address:        r[idx('address')]||'',
-      order_id:       r[idx('order_id')]||'',
-    }));
-    localStorage.setItem('ipc_profiles',JSON.stringify(allProfiles));
-    renderProfiles();
-    toast(`✅ ${allProfiles.length} profiles`);
+    const rows = await shGet('Profiles!A:AH');
+    if (rows.length < 2) { el.innerHTML='<div style="color:var(--muted);text-align:center;padding:20px">Sheet trống</div>'; return; }
+    const hdr = rows[0];
+    const idx = function(n){ return hdr.indexOf(n); };
+    profs = rows.slice(1).filter(function(r){ return r[0]; }).map(function(r) {
+      return {
+        name:           r[idx('name')]||'',
+        shop_name:      r[idx('shop_name')]||'',
+        product_name:   r[idx('product_name')]||'',
+        tracking_code:  r[idx('tracking_code')]||'',
+        phone_number:   r[idx('phone_number')]||'',
+        delivery_status:r[idx('delivery_status')]||'',
+        price:          r[idx('price')]||'',
+      };
+    });
+    localStorage.setItem('ipc_profs', JSON.stringify(profs));
+    renderProf();
+    toast('✅ ' + profs.length + ' profiles');
   } catch(e) {
-    el.innerHTML=`<div style="color:var(--red);padding:20px">❌ ${e.message}</div>`;
+    el.innerHTML='<div style="color:var(--red);padding:20px">❌ '+e.message+'</div>';
   }
 }
 
-function renderProfiles(filter='') {
-  const el=document.getElementById('profile-list');
-  const txt=filter.toLowerCase();
-  let list=allProfiles;
-  if (txt) list=list.filter(p=>
-    p.name.toLowerCase().includes(txt)||
-    (p.shop_name||'').toLowerCase().includes(txt)||
-    (p.tracking_code||'').toLowerCase().includes(txt)||
-    (p.phone_number||'').includes(txt)
-  );
-  if (!list.length){
+function renderProf(filter) {
+  const el  = document.getElementById('proflist');
+  const txt = (filter||'').toLowerCase();
+  var list  = profs;
+  if (txt) list = list.filter(function(p) {
+    return p.name.toLowerCase().includes(txt) ||
+           (p.shop_name||'').toLowerCase().includes(txt) ||
+           (p.tracking_code||'').toLowerCase().includes(txt) ||
+           (p.phone_number||'').includes(txt);
+  });
+  if (!list.length) {
     el.innerHTML='<div style="color:var(--muted);text-align:center;padding:40px 0">Không tìm thấy</div>';
     return;
   }
-  const sc=s=>{s=(s||'').toLowerCase();
+  function sc(s) {
+    s=(s||'').toLowerCase();
     if(s.includes('huỷ')||s.includes('cancel')) return 'cancelled';
     if(s.includes('giao thành công')||s.includes('delivered')) return 'delivered';
-    return 'pending';};
-  el.innerHTML=list.map(p=>`
-    <div class="profile-card">
-      <div class="pname">${p.name}</div>
-      <div class="pinfo">
-        🏪 ${p.shop_name||'—'}<br>
-        📦 ${(p.product_name||'—').slice(0,60)}<br>
-        🚚 ${p.tracking_code||'—'}<br>
-        📞 ${p.phone_number||'—'}<br>
-        💰 ${p.price||'—'}
-      </div>
-      ${p.delivery_status?`<div class="pstatus ${sc(p.delivery_status)}">📍 ${p.delivery_status}</div>`:''}
-    </div>`).join('');
+    return 'pending';
+  }
+  el.innerHTML = list.map(function(p) {
+    return '<div class="pc">' +
+      '<div class="pn">'+p.name+'</div>' +
+      '<div class="pi">🏪 '+(p.shop_name||'—')+'<br>' +
+      '📦 '+(p.product_name||'—').slice(0,60)+'<br>' +
+      '🚚 '+(p.tracking_code||'—')+'<br>' +
+      '📞 '+(p.phone_number||'—')+'<br>' +
+      '💰 '+(p.price||'—')+'</div>' +
+      (p.delivery_status ? '<div class="ps '+sc(p.delivery_status)+'">📍 '+p.delivery_status+'</div>' : '') +
+      '</div>';
+  }).join('');
 }
 
-function filterProfiles(){ renderProfiles(document.getElementById('search-profile').value); }
+function filterProf() { renderProf(document.getElementById('srpr').value); }
 
 // ── Test ──────────────────────────────────────────────────────────────────────
-async function testConnection() {
-  if (!isConfigured()) { toast('Chưa cấu hình'); return; }
+async function testConn() {
+  if (!isOk()) { toast('Chưa cấu hình'); return; }
   toast('⏳ Đang test...');
-  try {
-    await sheetsGet('IP_History!A1');
-    toast('✅ Kết nối thành công!');
-  } catch(e) { toast('❌ '+e.message); }
+  try { await shGet('IP_History!A1'); toast('✅ Kết nối thành công!'); }
+  catch(e) { toast('❌ '+e.message); }
 }
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+const PAGES = ['home','history','profiles','settings'];
+function go(id) {
+  PAGES.forEach(function(p) {
+    document.getElementById('page-'+p).classList.remove('active');
+  });
+  document.querySelectorAll('nav button').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('nav button')[['home','history','profiles','settings'].indexOf(id)].classList.add('active');
-  if (id==='history'&&!Object.keys(ipHistory).length) {
-    try{ipHistory=JSON.parse(localStorage.getItem('ipc_history')||'[]');}catch(e){}
-    renderHistory();
+  document.querySelectorAll('nav button')[PAGES.indexOf(id)].classList.add('active');
+  if (id==='history' && !ipHist.length) {
+    try { ipHist=JSON.parse(localStorage.getItem('ipc_hist')||'[]'); } catch(e){}
+    renderHist();
   }
-  if (id==='profiles'&&!allProfiles.length) {
-    try{allProfiles=JSON.parse(localStorage.getItem('ipc_profiles')||'[]');}catch(e){}
-    if(allProfiles.length) renderProfiles();
+  if (id==='profiles' && !profs.length) {
+    try { profs=JSON.parse(localStorage.getItem('ipc_profs')||'[]'); } catch(e){}
+    if (profs.length) renderProf();
   }
 }
 
@@ -640,7 +537,7 @@ function showPage(id) {
 function toast(msg) {
   const el=document.getElementById('toast');
   el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2500);
+  setTimeout(function(){ el.classList.remove('show'); }, 2500);
 }
 </script>
 </body>
