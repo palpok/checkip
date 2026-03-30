@@ -295,11 +295,13 @@ function parseTime(s) {
 
 // Check ip trong 24h gần đây
 function isDup24h(ip) {
+  ip = ip.trim();
   var now = Date.now(), h24 = 24*60*60*1000;
   for (var i = 0; i < ipHist.length; i++) {
     var r = ipHist[i];
-    if (r.ip !== ip) continue;
+    if ((r.ip || '').trim() !== ip) continue;
     var t = parseTime(r.time);
+    console.log('CHECK ROW:', r.ip, r.time, t);
     if (t > 0 && (now - t) <= h24) return true;
   }
   return false;
