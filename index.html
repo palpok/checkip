@@ -399,6 +399,7 @@ function checkAndPush() {
     })
     .then(function() {
       showRes(); renderH();
+      var dup = isDup24h(myip);
       toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
     })
     .catch(function(e) { showSt('wn','⚠️ '+e.message); })
