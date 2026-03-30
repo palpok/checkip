@@ -300,30 +300,21 @@ function isDup24h(ip) {
   var now = Date.now();
   var h24 = 24 * 60 * 60 * 1000;
 
-  console.log('CHECK IP:', ip);
-  console.log('TOTAL ROWS:', ipHist.length);
-
   for (var i = 0; i < ipHist.length; i++) {
     var r = ipHist[i];
 
     var rip = (r.ip || '').trim();
     if (rip !== ip) continue;
 
-    var t = parseTime(r.time);
-    console.log('MATCH FOUND:', rip, r.time, t);
+    var t = new Date(r.time).getTime(); // 🔥 FIX CHÍNH
 
     if (!t) continue;
 
-    var diff = now - t;
-    console.log('TIME DIFF:', diff);
-
-    if (diff <= h24) {
-      console.log('→ DUP TRUE');
+    if ((now - t) <= h24) {
       return true;
     }
   }
 
-  console.log('→ DUP FALSE');
   return false;
 }
 
