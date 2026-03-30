@@ -96,8 +96,8 @@ nav button.active{color:var(--cyan);border-bottom-color:var(--cyan);}
   <button class="btn bp" id="bc" onclick="checkAndPush()">🔍 Kiểm tra &amp; Ghi lên Sheet</button>
   <button class="btn bo" id="bco" onclick="checkOnly()">👁 Chỉ kiểm tra (không ghi)</button>
   <div class="card" id="dupcard" style="display:none">
-    <div class="ctit">⚠️ IP đã xuất hiện trong 24h</div>
-    <div id="dupmsg" style="font-size:13px;color:var(--red)"></div>
+    <div class="ctit">📋 Lịch sử xuất hiện</div>
+    <div id="dupmsg" style="font-size:12px;color:var(--muted);line-height:1.8"></div>
   </div>
 </div>
 
@@ -284,14 +284,43 @@ function loadIpHist() {
   });
 }
 
-// Giống logic PC: ip xuất hiện trong 24h → trùng
-function isDup(ip) {
-  const now = Date.now(), h24 = 24*60*60*1000;
-  return ipHist.some(function(r) {
-    if (r.ip !== ip) return false;
-    try { return (now - new Date(r.time.replace(' ','T')).getTime()) <= h24; }
-    catch(e) { return false; }
-  });
+// Parse time string "YYYY-MM-DD HH:MM:SS" → ms timestamp (không phụ thuộc timezone browser)
+function parseTime(s) {
+  if (!s) return 0;
+  // Tách thủ công để tránh browser parse sai timezone
+  var m = s.match(/(\d{4})-(\d{2})-(\d{2})[\sT](\d{2}):(\d{2}):(\d{2})/);
+  if (!m) return 0;
+  return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +m[6]).getTime();
+}
+
+// Check ip trong 24h gần đây
+function isDup24h(ip) {
+  var now = Date.now(), h24 = 24*60*60*1000;
+  for (var i = 0; i < ipHist.length; i++) {
+    var r = ipHist[i];
+    if (r.ip !== ip) continue;
+    var t = parseTime(r.time);
+    if (t > 0 && (now - t) <= h24) return true;
+  }
+  return false;
+}
+
+// Check ip từng xuất hiện bao giờ chưa (toàn bộ lịch sử)
+function hasEverAppeared(ip) {
+  for (var i = 0; i < ipHist.length; i++) {
+    if (ipHist[i].ip === ip) return true;
+  }
+  return false;
+}
+
+// Lần xuất hiện đầu tiên và cuối cùng
+function getAppearances(ip) {
+  var times = [];
+  for (var i = 0; i < ipHist.length; i++) {
+    if (ipHist[i].ip === ip) times.push(ipHist[i].time);
+  }
+  times.sort();
+  return times;
 }
 
 function nowStr() {
@@ -319,15 +348,33 @@ function showSt(cls, msg) {
   document.getElementById('dupcard').style.display = 'none';
 }
 
-function showRes(dup) {
-  if (!dup) {
-    showSt('ok', '✅ IP chưa xuất hiện trong 24h');
+function showRes() {
+  var in24  = isDup24h(myip);
+  var ever  = hasEverAppeared(myip);
+  var times = getAppearances(myip);
+
+  // Badge chính
+  var badge = '';
+  if (in24) {
+    badge = '<span class="sb dup">⚠️ IP đã xuất hiện trong 24h!</span>';
+  } else if (ever) {
+    badge = '<span class="sb wn">⚠️ IP từng xuất hiện trước đây</span>';
   } else {
-    document.getElementById('ipst').innerHTML =
-      '<span class="sb dup">⚠️ IP đã xuất hiện trong 24h!</span>';
-    document.getElementById('dupmsg').textContent =
-      'IP ' + myip + ' đã được ghi nhận trước đây trong vòng 24 giờ.';
-    document.getElementById('dupcard').style.display = 'block';
+    badge = '<span class="sb ok">✅ IP chưa từng xuất hiện</span>';
+  }
+  document.getElementById('ipst').innerHTML = badge;
+
+  // Chi tiết
+  var dc = document.getElementById('dupcard');
+  var dm = document.getElementById('dupmsg');
+  if (ever) {
+    var detail = 'Xuất hiện ' + times.length + ' lần.<br>';
+    if (times.length > 0) detail += 'Lần đầu: ' + times[0] + '<br>';
+    if (times.length > 1) detail += 'Lần cuối: ' + times[times.length-1];
+    dm.innerHTML = detail;
+    dc.style.display = 'block';
+  } else {
+    dc.style.display = 'none';
   }
 }
 
@@ -336,7 +383,7 @@ function checkOnly() {
   if (!isOk()) { showSt('wn','⚠️ Chưa cấu hình URL'); return; }
   showSt('ld','⏳ Đang kiểm tra...'); setBtns(true);
   loadIpHist()
-    .then(function() { showRes(isDup(myip)); renderH(); })
+    .then(function() { showRes(); renderH(); })
     .catch(function(e) { showSt('wn','⚠️ '+e.message); })
     .finally(function() { setBtns(false); });
 }
@@ -348,10 +395,10 @@ function checkAndPush() {
   loadIpHist()
     .then(function() {
       var dup = isDup(myip);
-      return appendMyIp().then(function() { return dup; });
+      return appendMyIp();
     })
-    .then(function(dup) {
-      showRes(dup); renderH();
+    .then(function() {
+      showRes(); renderH();
       toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
     })
     .catch(function(e) { showSt('wn','⚠️ '+e.message); })
