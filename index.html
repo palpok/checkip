@@ -391,21 +391,33 @@ function checkOnly() {
 function checkAndPush() {
   if (!myip) { showSt('wn','⚠️ Không lấy được IP'); return; }
   if (!isOk()) { showSt('wn','⚠️ Chưa cấu hình URL'); return; }
-  showSt('ld','⏳ Kiểm tra & ghi lên Sheet...'); setBtns(true);
-  var dup = isDup24h(myip);
+
+  showSt('ld','⏳ Kiểm tra & ghi lên Sheet...');
+  setBtns(true);
+
   loadIpHist()
     .then(function() {
-      if(!dup) {
-        return appendMyIp();
+      var dup = isDup24h(myip); // ✅ check sau khi load
+
+      if (!dup) {
+        return appendMyIp().then(() => dup);// truyền dup xuống dưới
       }
-      
+
+      return dup;
     })
     .then(function() {
-      showRes(); renderH();
+      showRes();
+      renderH();
+
+      
       toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
     })
-    .catch(function(e) { showSt('wn','⚠️ '+e.message); })
-    .finally(function() { setBtns(false); });
+    .catch(function(e) {
+      showSt('wn','⚠️ ' + e.message);
+    })
+    .finally(function() {
+      setBtns(false);
+    });
 }
 
 // ── Render IP list ────────────────────────────────────────────────────────────
