@@ -398,7 +398,6 @@ function checkAndPush() {
   loadIpHist()
     .then(function() {
       var dup = isDup24h(myip); // ✅ check sau khi load
-      showSt('wn','Giá trị dup = '+dup)
       if (dup) {
         return appendMyIp().then(() => dup);// truyền dup xuống dưới
       }
