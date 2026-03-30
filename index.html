@@ -395,8 +395,10 @@ function checkAndPush() {
   var dup = isDup24h(myip);
   loadIpHist()
     .then(function() {
+      if(dup) {
+        return appendMyIp();
+      }
       
-      return appendMyIp();
     })
     .then(function() {
       showRes(); renderH();
