@@ -397,6 +397,7 @@ function checkAndPush() {
 
   loadIpHist()
     .then(function() {
+      console.log('IP LIST:', ipHist); // 👈 kiểm tra
       var dup = isDup24h(myip); // ✅ check sau khi load
       if (!dup) {
         return appendMyIp().then(() => dup);// truyền dup xuống dưới
