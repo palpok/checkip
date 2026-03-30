@@ -298,7 +298,7 @@ function isDup24h(ip) {
   ip = (ip || '').trim();
 
   var now = Date.now();
-  var h24 = 24 * 60 * 60 * 1000;
+  var h24 = 7 * 24 * 60 * 60 * 1000;
 
   for (var i = 0; i < ipHist.length; i++) {
     var r = ipHist[i];
@@ -369,7 +369,7 @@ function showRes() {
   // Badge chính
   var badge = '';
   if (in24) {
-    badge = '<span class="sb dup">⚠️ IP đã xuất hiện trong 24h!</span>';
+    badge = '<span class="sb dup">⚠️ IP đã xuất hiện trong 1 tuần!</span>';
   } else if (ever) {
     badge = '<span class="sb wn">⚠️ IP từng xuất hiện trước đây</span>';
   } else {
@@ -410,22 +410,20 @@ function checkAndPush() {
 
   loadIpHist()
     .then(function() {
-      console.log('IP LIST:', ipHist); // 👈 kiểm tra
       var dup = isDup24h(myip); // ✅ check sau khi load
-      console.log(dup);
+      showRes();
       if (!dup) {
         return appendMyIp().then(() => dup);// truyền dup xuống dưới
       }
-
+      
       return dup;
     })
     .then(function(dup) {
-      console.log('after then dup=', dup);
-      showRes();
+      
       renderH();
 
       
-      toast(dup ? '⚠️ IP đã xuất hiện trong 24h!' : '✅ Đã ghi IP lên Sheet');
+      toast(dup ? '⚠️ IP đã xuất hiện trong 1 tuần!' : '✅ Đã ghi IP lên Sheet');
     })
     .catch(function(e) {
       showSt('wn','⚠️ ' + e.message);
