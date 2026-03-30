@@ -394,7 +394,7 @@ function checkAndPush() {
   showSt('ld','⏳ Kiểm tra & ghi lên Sheet...'); setBtns(true);
   loadIpHist()
     .then(function() {
-      var dup = isDup(myip);
+      var dup = isDup24h(myip);
       return appendMyIp();
     })
     .then(function() {
